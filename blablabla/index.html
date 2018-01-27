@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="main.js"></script>
+    <script src="wires.js"></script>
+    <script src="button.js"></script>
+    <script src="keypad.js"></script>
+    <script src="simonsays.js"></script>
+    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="modules.css"/>
+    <title>Bla bla bla..</title>
+    </head>
+    <body>
+        <div id="flash"></div>
+        <center>
+            <div id="bomb">
+                <div id="bombBase">
+                    <button id="startGame" onclick="startGame()">Start Game</button>
+                    <div id="langs">
+                        <button id="pickEnglish" onclick="pickLang('eng')" style="border-style:inset">English</button>
+                        <button id="pickDanish" onclick="pickLang('dk')">Dansk</button>
+                    </div>
+                </div>
+                <div id="settings">
+                    <div>
+                        <div id="serialDisplay" class="setting"></div>
+                        <br>
+                        <div id="dateDisplay" class="setting"></div>
+                    </div>
+                    <div>
+                        <div id="strikeDisplay" class="setting"></div>
+                        <br>
+                        <div id="timerDisplay" class="setting"></div>
+                    </div>
+                    <div>
+                        <div id="batteryDisplay" class="setting"></div>
+                    </div>
+                        <button id="abortMis" onclick="resetGame()">Abort mission</button>
+                </div>
+            </div>
+        </center>
+    </body>
+</html>
