@@ -79,7 +79,7 @@ function startGame() {
     date();
     batteries();
     startTime = new Date().getTime();
-    var x = setInterval(function() {
+    var x = window.setInterval(function() {
         if (gameActive) {
             document.getElementById("timerDisplay").innerHTML = "";
             var newTimer = document.createElement("div");
@@ -106,7 +106,7 @@ function explosion(){
     flash.style.width = "105%";
     flash.style.height = "105%";
     opacity = 1.2;
-    setInterval(function() {
+    window.setInterval(function() {
         if (opacity <= 0) {
             flash.style.width = "0%";
             flash.style.height = "0%";
