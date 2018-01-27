@@ -86,7 +86,7 @@ function startGame() {
             var currentTime = new Date().getTime();
             newTimer.innerHTML = timeConvert(periode * 1000 - (currentTime - startTime));
             document.getElementById("timerDisplay").append(newTimer);
-            if (periode * 1000 - (currentTime - startTime) <= 0) resetGame(false);
+            if (periode * 1000 - (currentTime - startTime) <= 0) resetGame("no");
         }
     });
     
@@ -119,10 +119,10 @@ function explosion(){
 
 function resetGame(win) {
     
-    if (win) {
+    if (win == "yes") {
         var audio = new Audio('cheer.mp3');
         audio.play();
-    } else if (!win) explosion();
+    } else if (win == "no") explosion();
     
     document.getElementById("settings").style.opacity = 0;
     document.getElementById("bombBase").innerHTML = "";
@@ -177,7 +177,7 @@ function updateStrikes() {
         if (i + 1 <= playerStrikes) newStrike.className += " strikeDispAct";
         strikeDisplay.append(newStrike);
     }
-    if (playerStrikes == maxStrikes) return resetGame(false);
+    if (playerStrikes == maxStrikes) return resetGame("no");
 }
 
 function updateModuleLight(module) {
@@ -186,7 +186,7 @@ function updateModuleLight(module) {
     moduleChildren[0].className += " moduleLightAct";
      
     var activeLights = document.getElementsByClassName("moduleLightAct");
-    if (activeLights.length == moduleArray.length) resetGame(true);
+    if (activeLights.length == moduleArray.length) resetGame("yes");
 }
 
 var serialValue;
