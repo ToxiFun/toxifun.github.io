@@ -86,7 +86,7 @@ function startGame() {
             var currentTime = new Date().getTime();
             newTimer.innerHTML = timeConvert(periode * 1000 - (currentTime - startTime));
             document.getElementById("timerDisplay").append(newTimer);
-            if (periode * 1000 - (currentTime - startTime) <= 0) resetGame();
+            if (periode * 1000 - (currentTime - startTime) <= 0) resetGame(false);
         }
     });
     
@@ -122,7 +122,7 @@ function resetGame(win) {
     if (win) {
         var audio = new Audio('cheer.mp3');
         audio.play();
-    } else explosion();
+    } else if (!win) explosion();
     
     document.getElementById("settings").style.opacity = 0;
     document.getElementById("bombBase").innerHTML = "";
@@ -177,7 +177,7 @@ function updateStrikes() {
         if (i + 1 <= playerStrikes) newStrike.className += " strikeDispAct";
         strikeDisplay.append(newStrike);
     }
-    if (playerStrikes == maxStrikes) return resetGame();
+    if (playerStrikes == maxStrikes) return resetGame(false);
 }
 
 function updateModuleLight(module) {
