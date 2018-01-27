@@ -96,6 +96,7 @@ function startGame() {
     }
 }
 
+var opacity;
 function explosion(){    
     var audio = new Audio('explosion.mp3');
     audio.play();
@@ -104,7 +105,7 @@ function explosion(){
     flash.style.opacity = "1";
     flash.style.width = "105%";
     flash.style.height = "105%";
-    var opacity = 1.2;
+    opacity = 1.2;
     setInterval(function() {
         if (opacity <= 0) {
             flash.style.width = "0%";
