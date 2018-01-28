@@ -15,6 +15,9 @@ Creates modules (module)
 //CONST VARIABLES
 var minModules = 2;
 var totalMaxModules = 10;
+var audioCheer = new Audio('cheer.mp3');
+var audioExp = new Audio('explosion.mp3');
+
 
 //CONST INGAME VARIABLES
 var maxStrikes;
@@ -98,8 +101,7 @@ function startGame() {
 
 var opacity;
 function explosion(){    
-    var audio = new Audio('explosion.mp3');
-    audio.play();
+    audioExp.play();
     
     var flash = document.getElementById("flash");
     flash.style.opacity = "1";
@@ -118,13 +120,33 @@ function explosion(){
     
 }
 
+function blink(t) {
+    window.setInterval(function() {
+        if (!gameActive) return;
+        var d = new Date();
+        if (d.getMilliseconds() < 500) {
+            t.style.color = "#ff2323";
+            t.style.textShadow = "0px 1px 5px #ff2323";
+        } else {
+            t.style.color = "#2adb00";
+            t.style.textShadow = "0px 1px 5px #2adb00";
+        }
+    }, 1);
+}
+
 function resetGame(win) {
     
     if (win == "yes") {
-        var audio = new Audio('cheer.mp3');
-        audio.play();
-    } else if (win == "no") explosion();
-    
+        audioCheer.play();
+        gameActive = false;
+        window.setTimeout( function() { reset(); }, 10000);
+    } else if (win == "no") {
+        explosion();
+        reset();
+    }
+}
+
+function reset() {
     document.getElementById("bomb").style.width = "300px";
     document.getElementById("settings").style.opacity = 0;
     document.getElementById("bombBase").innerHTML = "";
@@ -160,14 +182,25 @@ function resetGame(win) {
 
 function timeConvert(time) {
     bombStat.time = time;
+    
+    if (time < 10000) {
+        blink(document.getElementById("timerDisplay"))
+    }
+    
     var m = (Math.floor((time/1000/60) << 0)).toString();
-    if (m.length == 1) m = "0" + m;
     var s = (Math.floor((time/1000) % 60)).toString();
     if (s.length == 1) s = "0" + s;
-    var ms = (Math.floor(time % 1000 / 10)).toString();
-    if (ms.length == 1) ms = "0" + ms;
-    //if (ms == 1) window.devicePixelRatio;
-    return m + ":" + s + ":" + ms;
+    
+    if (60000 < time) {
+        return m + ":" + s
+    } else {
+        var ms = (Math.floor(time % 1000 / 10)).toString();
+        if (ms.length == 1) ms = "0" + ms;
+        return s + ":" + ms;
+    }
+    
+    
+    
 }
 
 function updateStrikes() {
