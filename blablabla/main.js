@@ -79,7 +79,7 @@ function startGame() {
     date();
     batteries();
     startTime = new Date().getTime();
-    var x = window.setInterval(function() {
+    window.setInterval(function() {
         if (gameActive) {
             document.getElementById("timerDisplay").innerHTML = "";
             var newTimer = document.createElement("div");
@@ -88,7 +88,7 @@ function startGame() {
             document.getElementById("timerDisplay").append(newTimer);
             if (periode * 1000 - (currentTime - startTime) <= 0) resetGame("no");
         }
-    });
+    }, 1);
     
     for (var i = 0; i < maxModules; i++) {
         var module = new Module(i);
@@ -125,6 +125,7 @@ function resetGame(win) {
         audio.play();
     } else if (win == "no") explosion();
     
+    document.getElementById("bomb").style.width = "300px";
     document.getElementById("settings").style.opacity = 0;
     document.getElementById("bombBase").innerHTML = "";
     document.getElementById("batteryDisplay").innerHTML = "";
