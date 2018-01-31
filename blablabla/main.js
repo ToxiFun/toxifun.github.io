@@ -79,19 +79,20 @@ function startGame() {
         "date": 0,
         "lang": bombStat.lang
     }
-    if (maxModules < minModules) {
+    playerStrikes = 0;
+    
+    if (bombStat.maxModules < minModules) {
         if (bombStat.lang == "eng") return alert("Too few modules! Must have 2.");
         else if (bombStat.lang == "dk") return alert("For få moduler! Der skal være 2.");
     }
-    if (maxModules > totalMaxModules) {
+    if (bombStat.maxModules > totalMaxModules) {
         if (bombStat.lang == "eng") return alert("Too many modules! Max of 10.");
         else if (bombStat.lang == "dk") return alert("For mange moduler! Maksimum 10.");
     }
-    playerStrikes = 0;
     
-    if (maxModules <= 4) document.getElementById("bomb").style.width = maxModules*140
-    else if (maxModules <= 8) document.getElementById("bomb").style.width = maxModules*80+10
-    else document.getElementById("bomb").style.width = maxModules*75
+    if (bombStat.maxModules <= 4) document.getElementById("bomb").style.width = bombStat.maxModules*140
+    else if (bombStat.maxModules <= 8) document.getElementById("bomb").style.width = bombStat.maxModules*80+10
+    else document.getElementById("bomb").style.width = bombStat.maxModules*75
     document.getElementById("bombBase").innerHTML = "";
     document.getElementById("settings").style.opacity = 1;
     if (bombStat.lang == "eng") document.getElementById("abortMis").innerHTML = "Abort Mission";
@@ -107,13 +108,13 @@ function startGame() {
             document.getElementById("timerDisplay").innerHTML = "";
             var newTimer = document.createElement("div");
             var currentTime = new Date().getTime();
-            newTimer.innerHTML = timeConvert(periode * 1000 - (currentTime - startTime));
+            newTimer.innerHTML = timeConvert(bombStat.periode * 1000 - (currentTime - startTime));
             document.getElementById("timerDisplay").append(newTimer);
-            if (periode * 1000 - (currentTime - startTime) <= 0) resetGame("no");
+            if (bombStat.periode * 1000 - (currentTime - startTime) <= 0) resetGame("no");
         }
     }, 1);
     
-    for (var i = 0; i < maxModules; i++) {
+    for (var i = 0; i < bombStat.maxModules; i++) {
         var module = new Module(i);
         modules.push(module);
     }
@@ -232,13 +233,13 @@ function timeConvert(time) {
 function updateStrikes() {
     var strikeDisplay = document.getElementById("strikeDisplay");
     strikeDisplay.innerHTML = "";
-    for (var i = 0; i < maxStrikes - 1; i++) {
+    for (var i = 0; i < bombStat.maxStrikes - 1; i++) {
         var newStrike = document.createElement("div");
         newStrike.className = "strikeDisp";
         if (i + 1 <= playerStrikes) newStrike.className += " strikeDispAct";
         strikeDisplay.append(newStrike);
     }
-    if (playerStrikes == maxStrikes) return resetGame("no");
+    if (playerStrikes == bombStat.maxStrikes) return resetGame("no");
 }
 
 function updateModuleLight(module) {
