@@ -39,7 +39,7 @@ function pickLang(lang) {
     bombStat.lang = lang;
     if (lang == "eng") alert("Language changed to English.");
     else if (lang == "dk") alert("Sprog ændret til dansk.");
-    resetGame();
+    resetGame(undefined);
 }
 
 function pickDiff(diff) {
@@ -47,23 +47,33 @@ function pickDiff(diff) {
         bombStat.periode = 120;
         bombStat.maxStrikes = 3;
         bombStat.maxModules = 2;
-        maxSimonLength: 0;
+        bombStat.maxSimonLength = 0;
+        if (bombStat.lang == "eng") alert("Difficult set to easy.");
+        else if (bombStat.lang == "dk") alert("Sværhedsgrad ændret til let.");
     } else if (diff == "medium") {
         bombStat.periode = 120;
         bombStat.maxStrikes = 3;
         bombStat.maxModules = 4;
-        maxSimonLength: 3;
+        bombStat.maxSimonLength = 3;
+        if (bombStat.lang == "eng") alert("Difficult set to medium.");
+        else if (bombStat.lang == "dk") alert("Sværhedsgrad ændret til medium.");
     } else if (diff == "hard") {
         bombStat.periode = 60;
         bombStat.maxStrikes = 2;
         bombStat.maxModules = 6;
-        maxSimonLength: 3;
+        bombStat.maxSimonLength = 3;
+        if (bombStat.lang == "eng") alert("Difficult set to hard.");
+        else if (bombStat.lang == "dk") alert("Sværhedsgrad ændret til svær.");
     } else if (diff == "extreme") {
         bombStat.periode = 60;
         bombStat.maxStrikes = 1;
         bombStat.maxModules = 8;
-        maxSimonLength: 4;
+        bombStat.maxSimonLength = 4;
+        if (bombStat.lang == "eng") alert("Difficult set to extreme.");
+        else if (bombStat.lang == "dk") alert("Sværhedsgrad ændret til ekstrem.");
     }
+    resetGame(undefined);
+}
 
 //INGAME VARIABLES
 var playerStrikes;
@@ -72,13 +82,10 @@ var modules = [];
 function startGame() {
     gameActive = true;
     
-    bombStat = {
-        "time": 0,
-        "serial": "",
-        "battery": 0,
-        "date": 0,
-        "lang": bombStat.lang
-    }
+    bombStat.time = 0;
+    bombStat.serial = "";
+    bombStat.battery = 0;
+    bombStat.date = 0;
     playerStrikes = 0;
     
     if (bombStat.maxModules < minModules) {
@@ -90,9 +97,9 @@ function startGame() {
         else if (bombStat.lang == "dk") return alert("For mange moduler! Maksimum 10.");
     }
     
-    if (bombStat.maxModules <= 4) document.getElementById("bomb").style.width = bombStat.maxModules*140
-    else if (bombStat.maxModules <= 8) document.getElementById("bomb").style.width = bombStat.maxModules*80+10
-    else document.getElementById("bomb").style.width = bombStat.maxModules*75
+    if (bombStat.maxModules <= 4) document.getElementById("bomb").style.width = bombStat.maxModules * 140
+    else if (bombStat.maxModules <= 8) document.getElementById("bomb").style.width = bombStat.maxModules * 80 + 10
+    else document.getElementById("bomb").style.width = bombStat.maxModules * 75
     document.getElementById("bombBase").innerHTML = "";
     document.getElementById("settings").style.opacity = 1;
     if (bombStat.lang == "eng") document.getElementById("abortMis").innerHTML = "Abort Mission";
@@ -164,6 +171,8 @@ function resetGame(win) {
     } else if (win == "no") {
         explosion();
         reset();
+    } else if (win == undefined) {
+        reset();
     }
 }
 
@@ -201,10 +210,41 @@ function reset() {
     document.getElementById("bombBase").append(langs);
     
     
-                        <button id="pickEasy" onclick="pickDiff('easy')">Easy</button>
-                        <button id="pickMedium" onclick="pickDiff('medium')">Medium</button>
-                        <button id="pickHard" onclick="pickDiff('hard')">Hard</button>
-                        <button id="pickEx" onclick="pickDiff('extreme')">Extreme</button>
+    var diffs = document.createElement("div");
+    diffs.id = "diff";
+    var diffButton = document.createElement("button");
+    diffButton.id = "pickEasy";
+    diffButton.onclick = function() { pickDiff('easy') };
+    if (bombStat.diff == "easy") diffButton.style.borderStyle = "inset";
+    if (bombStat.lang == "eng") diffButton.innerHTML = "Easy";
+    else if (bombStat.lang == "dk") diffButton.innerHTML = "Let";
+    diffs.append(diffButton);
+    
+    var diffButton = document.createElement("button");
+    diffButton.id = "pickMedium";
+    diffButton.onclick = function() { pickDiff('medium') };
+    if (bombStat.diff == "medium") diffButton.style.borderStyle = "inset";
+    diffButton.innerHTML = "Medium";
+    diffs.append(diffButton);
+    
+    var diffButton = document.createElement("button");
+    diffButton.id = "pickHard";
+    diffButton.onclick = function() { pickDiff('hard') };
+    if (bombStat.diff == "hard") diffButton.style.borderStyle = "inset";
+    if (bombStat.lang == "eng") diffButton.innerHTML = "Hard";
+    else if (bombStat.lang == "dk") diffButton.innerHTML = "Svær";
+    diffs.append(diffButton);
+    
+    var diffButton = document.createElement("button");
+    diffButton.id = "pickEx";
+    diffButton.onclick = function() { pickDiff('extreme') };
+    if (bombStat.diff == "extreme") diffButton.style.borderStyle = "inset";
+    if (bombStat.lang == "eng") diffButton.innerHTML = "Extreme";
+    else if (bombStat.lang == "dk") diffButton.innerHTML = "Ekstrem";
+    diffs.append(diffButton);
+    
+    
+    document.getElementById("bombBase").append(diffs);
 }
 
 function timeConvert(time) {
