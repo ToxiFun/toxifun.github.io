@@ -20,19 +20,20 @@ var audioExp = new Audio('explosion.mp3');
 
 
 //CONST INGAME VARIABLES
-var maxStrikes;
-var maxModules;
+
 var startTime;
-var periode;
-var maxSimonLength;
+var gameActive;
 var bombStat = {
     "time": 0,
     "serial": "",
     "battery": 0,
     "date": 0,
-    "lang": "eng"
+    "lang": "eng",
+    "maxSimonLength": 3,
+    "periode": 120,
+    "maxStrikes": 3,
+    "maxModules": 6
 }
-var gameActive;
 
 function pickLang(lang) {
     bombStat.lang = lang;
@@ -40,6 +41,29 @@ function pickLang(lang) {
     else if (lang == "dk") alert("Sprog ændret til dansk.");
     resetGame();
 }
+
+function pickDiff(diff) {
+    if (diff == "easy") {
+        bombStat.periode = 120;
+        bombStat.maxStrikes = 3;
+        bombStat.maxModules = 2;
+        maxSimonLength: 0;
+    } else if (diff == "medium") {
+        bombStat.periode = 120;
+        bombStat.maxStrikes = 3;
+        bombStat.maxModules = 4;
+        maxSimonLength: 3;
+    } else if (diff == "hard") {
+        bombStat.periode = 60;
+        bombStat.maxStrikes = 2;
+        bombStat.maxModules = 6;
+        maxSimonLength: 3;
+    } else if (diff == "extreme") {
+        bombStat.periode = 60;
+        bombStat.maxStrikes = 1;
+        bombStat.maxModules = 8;
+        maxSimonLength: 4;
+    }
 
 //INGAME VARIABLES
 var playerStrikes;
@@ -55,8 +79,6 @@ function startGame() {
         "date": 0,
         "lang": bombStat.lang
     }
-    maxStrikes = 3;
-    maxModules = 6;
     if (maxModules < minModules) {
         if (bombStat.lang == "eng") return alert("Too few modules! Must have 2.");
         else if (bombStat.lang == "dk") return alert("For få moduler! Der skal være 2.");
@@ -66,8 +88,6 @@ function startGame() {
         else if (bombStat.lang == "dk") return alert("For mange moduler! Maksimum 10.");
     }
     playerStrikes = 0;
-    periode = 120 //sec
-    maxSimonLength = 3;
     
     if (maxModules <= 4) document.getElementById("bomb").style.width = maxModules*140
     else if (maxModules <= 8) document.getElementById("bomb").style.width = maxModules*80+10
@@ -178,6 +198,12 @@ function reset() {
     langs.append(langButton);
     
     document.getElementById("bombBase").append(langs);
+    
+    
+                        <button id="pickEasy" onclick="pickDiff('easy')">Easy</button>
+                        <button id="pickMedium" onclick="pickDiff('medium')">Medium</button>
+                        <button id="pickHard" onclick="pickDiff('hard')">Hard</button>
+                        <button id="pickEx" onclick="pickDiff('extreme')">Extreme</button>
 }
 
 function timeConvert(time) {
