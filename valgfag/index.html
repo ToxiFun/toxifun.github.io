@@ -1,12 +1,65 @@
-<!DOCTYPE HTML>
 <html>
 <head>
-<title> </title>
-<style>
-</style>
+<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 <script>
+    
+    function submit() {
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAVJSl5EgDAMS7mvDZOa3YDI7pZP3WTSxA",
+        authDomain: "valgfag-c314c.firebaseapp.com",
+        databaseURL: "https://valgfag-c314c.firebaseio.com",
+        projectId: "valgfag-c314c",
+        storageBucket: "",
+        messagingSenderId: "832388701388"
+      };
+      firebase.initializeApp(config);
+        var database = firebase.database().ref();
+        
+        var name = document.getElementById("name").value;
+        var valgt = document.getElementsByClassName("valgt");
+        var valgtThis;
+        var count = 0;
+        if (name.length < 1) return alert("Fejl!");
+        for (var i = 0; i < valgt.length; i++) { if (valgt[i].checked == true) { count++; valgtThis = valgt[i] } }
+        
+        if (count != 1) return alert("Fejl!");
+        
+        var valg = valgtThis.value;
+        console.log(valg)
+        database.child(name).set(valg);
+        
+        var main = document.getElementById("main");
+        main.innerHTML = ""
+        
+        var head = document.createElement("h2");
+        head.append(document.createTextNode("Dit valg er blevet modtaget."));
+        main.append(head);
+    }
+    
 </script>
+    <style>
+        div {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 30%;
+            max-width: 50%;
+        }
+    </style>
 </head>
 <body>
-</body>
+    <center>
+    <div id="main">
+        <span>Navn: <input id="name" type="text" name="name"></span>
+        <form>
+            <input id="valgPro" class="valgt" type="radio" value="Programmering" name="valg" checked>Programmering
+            <input id="valgBold" class="valgt" type="radio" value="Boldspil" name="valg">Boldspil
+            <input id="valgDesign" class="valgt" type="radio" value="Design" name="valg">Design
+            <input id="valgLek" class="valgt" type="radio" value="Lektiecafé" name="valg">Lektiecafé
+        </form>
+            
+        <input id="submit" type="button" name="submit" onclick="submit()" value="Send valg">
+    </div>
+    </center>
+</body>    
 </html>
