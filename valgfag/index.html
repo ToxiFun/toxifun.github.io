@@ -4,7 +4,6 @@
 <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 <script>
     
-    function submit() {
       // Initialize Firebase
       var config = {
         apiKey: "AIzaSyAVJSl5EgDAMS7mvDZOa3YDI7pZP3WTSxA",
@@ -16,6 +15,8 @@
       };
       firebase.initializeApp(config);
         var database = firebase.database().ref();
+    
+    function submit() {
         
         var name = document.getElementById("name").value;
         var valgt = document.getElementsByClassName("valgt");
