@@ -1,0 +1,400 @@
+<html>
+<head>
+<script>
+	//Develop = true: stops program after boards created
+	var size = 200; develop = false;
+	var felts; numbers; harbors; fit; revFit; deg; canvas; ctx; xc; yc;
+	
+	//Error function - stops
+	function errorCode(message) {
+		document.getElementById("board").innerHTML = "";
+		return alert(message);
+	}
+	
+	//Start program
+	function createAndPrint() {
+	
+		//Create boards
+		var counting = document.getElementById("counting").value;
+		if (counting < 1 || 49 < counting) return alert("Min 1 - max 49..")
+		document.getElementById("board").innerHTML = "";
+		for (var c = 0; c < counting; c++) { createBoard(c); }
+		
+		//Stop program - under development
+		if (develop) return;
+		
+		//Print & reset
+		print();
+		document.getElementById("board").innerHTML = "";
+	}
+	
+	//Print function
+	function print() {
+		var win1 = window.open();
+		var canvass = document.getElementsByClassName("canvas");
+		var ruless = document.getElementsByClassName("rules");
+		var bankk = document.getElementsByClassName("bank");
+		for (var ca = 0; ca < canvass.length; ca++) {
+			win1.document.write("<br><img src = '"+canvass[ca].toDataURL()+"'/>");
+			win1.document.write("<br><img src = '"+ruless[ca].toDataURL()+"'/>");
+			win1.document.write("<br><img src = '"+bankk[ca].toDataURL()+"'/>");
+		}
+		win1.print();
+		win1.location.reload();
+		win1.close();
+	}
+	
+	//Board creater
+	function createBoard(c) {
+	
+		//Create canvas
+		canvas = document.createElement("canvas");
+		canvas.width = "2700";
+		canvas.height = "2400";
+		canvas.className = "canvas";
+		document.getElementById("board").appendChild(canvas);
+	
+		//Board items
+		fit = {"Field":"Grain", "Forest":"Lumber", "Hill":"Brick", "Pasture":"Wool", "Mountain":"Ore", "Harbor":"Random"};
+		revFit = {}; for (var key in fit) { revFit[fit[key]] = key; };
+		felts = ["Field", "Field", "Field", "Field", "Forest", "Forest", "Forest", "Forest", "Hill", "Hill", "Hill", "Pasture", "Pasture", "Pasture", "Pasture", "Mountain", "Mountain", "Mountain", "Desert"]
+		harbors = ["Grain", "Lumber", "Brick", "Wool", "Ore", "Random"];
+		numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
+		colors = {"Sand": "rgba(255, 245, 220, 0.4)", "Water": "rgb(41, 189, 217)", "Field": "rgb(250, 230, 50)", "Forest": "rgb(67, 174, 95)", "Hill": "rgb(189, 118, 82)", "Pasture": "rgb(225, 224, 216)", "Mountain": "rgb(141, 157, 139)", "Desert": "rgb(194, 168, 99)", "Harbor": "rgb(102, 51, 0)"} //Has to stay
+
+		ctx = canvas.getContext("2d");
+		xc = canvas.width/2; yc = canvas.height/2;
+		deg = 60*Math.PI/180; //Has to stay
+		
+		//Make background
+		ctx.fillStyle = colors.Sand;
+		ctx.beginPath();
+		ctx.arc(xc, yc, (4+0.1*6)*size, 0, 2*Math.PI);
+		ctx.stroke();
+		ctx.fill();
+		
+		//Zero layer
+		hexagon(xc, yc, "felt", 0, 0);
+		
+		//First layer
+		for (var j = 1; j <= 12; j+=2) hexagon(xc, yc, "felt", 1, j);
+		
+		//Second layer
+		for (var j = 0; j < 12; j+=2) hexagon(xc, yc, "felt", 1.73, j);
+		for (var j = 1; j < 12; j+=2) hexagon(xc, yc, "felt", 2, j);
+		
+		//Check if felts and numbers are used
+		if (felts.length != 0) errorCode("ERROR! Code felts!");
+		if (numbers.length != 0) errorCode("ERROR! Code numbers!");
+		
+		//Random harbors
+		harbor(-6, 0, "Harbor3", 1);
+		harbor(3, 3, "Harbor3", 3);
+		harbor(3, -3, "Harbor3", 5);
+		
+		//Harbors
+		harbor(5, 1, "Harbor2", 4);
+		harbor(5, -1, "Harbor2", 4);
+		harbor(-1, -3, "Harbor2", 6);
+		harbor(-1, +3, "Harbor2", 8);
+		harbor(-4, -2, "Harbor2", 6);
+		harbor(-4, +2, "Harbor2", 2);
+		
+		//Check if harbors are used
+		if (harbors.length != 0) errorCode("ERROR! Code harbors!");
+		
+		//Create thief brick
+		thief(ctx);
+		
+		//Create rules
+		rules();
+		
+		//Create banks
+		banks();
+	}
+	
+	//Make hexagons
+	var ranFelt;
+	function hexagon(xc, yc, cont, layer, j) {
+	
+		var move = Math.tan(deg) * layer + 0.1 * layer;
+		xc += Math.sin((deg/2)*j)*size*move; yc += Math.cos((deg/2)*j)*size*move;
+			
+		ctx = canvas.getContext("2d");
+		ctx.lineWidth = "1";
+		ctx.strokeStyle = "black";
+		
+		//For harbors
+		ctx.beginPath();
+		if (cont == "Harbor3" || cont == "Harbor2") {
+			for (var i = j; i <= j+2; i++) {
+				var x = Math.sin(deg*i)*size; y = Math.cos(deg*i)*size;
+				if (i == 0) ctx.moveTo(xc, yc);
+				else if (i == j+2) ctx.lineTo(xc, yc);
+				else ctx.lineTo(xc+x, yc+y);
+			}
+			
+		//For felts
+		} else {
+			for (var i = 0; i <= 6; i++) {
+				var x = Math.sin(deg*i) * size; y = Math.cos(deg*i) * size;
+				if (i == 0) ctx.moveTo(xc+x, yc+y);
+				else ctx.lineTo(xc+x, yc+y);
+			}
+		}
+		ctx.stroke();
+		
+		//Text
+		ctx.textAlign = "center";
+		//Felt content
+		if (cont == "felt") {
+			ctx.fillStyle = colors.Sand;
+			ctx.fill();
+			ranFelt = Math.floor(Math.random()*felts.length);
+			var curFelt = felts[ranFelt];
+			feltCont(xc, yc, curFelt, curFelt);
+			felts.splice(ranFelt, 1);
+			
+			//Number on felt
+			if (curFelt != "Desert") {
+				var ranNum = Math.floor(Math.random()*numbers.length);
+				var curNum = numbers[ranNum];
+				ctx.font = "bold " + size * 0.4 + "px Arial";
+				if (curNum == 6 || curNum == 8) ctx.fillStyle = "rgb(235, 0, 0)";
+				ctx.fillText(curNum, xc, yc+size*0.4);
+				ctx.strokeText(curNum, xc, yc+size*0.4);
+				numbers.splice(ranNum, 1);
+			}
+			
+		//Harbor content
+		} else {
+			//Color harbors
+			ctx.fillStyle = colors.Harbor;
+			ctx.fill();
+			
+			//2:1 Harbor
+			if (cont == "Harbor2") {
+				ranHarb = Math.floor(Math.random()*harbors.length);
+				var curHarb = harbors[ranHarb];
+				feltCont(xc, yc, revFit[harbors[ranHarb]], harbors[ranHarb]);
+				harbors.splice(ranHarb, 1);
+				//Write ratio
+				if (curHarb == "Random") ctx.fillText("3:1", xc, yc+size*0.3);
+				else ctx.fillText("2:1", xc, yc+size*0.3);
+			} else if (cont == "Harbor3") {
+				feltCont(xc, yc, "Random", "Random");
+				ctx.fillText("3:1", xc, yc+size*0.3);
+			}
+		}
+	}
+	
+	//Create felt or harbor content in circle
+	function feltCont(xc, yc, cont, text) {
+		ctx.fillStyle = colors[cont];
+		ctx.beginPath();
+		ctx.arc(xc, yc, size/1.3, 0, 2 * Math.PI);
+		ctx.fill();
+		ctx.fillStyle = "black";
+		ctx.font = "bold " + size * 0.3 + "px Arial";
+		ctx.fillText(text, xc, yc);
+		ctx.fillStyle = "black";
+		ctx.font = "bold " + size * 0.3 + "px Arial";
+		ctx.fillText(text, xc, yc);
+	}
+	
+	function harbor(x, y, type, rotate) {
+		hexagon(canvas.width/2+(Math.tan(deg)*0.5*x+0.05*x)*size, canvas.height/2+size*(1.5*y+0.1*y), type, 0, rotate);
+	}
+	
+	function thief(canvas) {
+		var place = 100;
+		ctx.fillStyle = colors.Desert;
+		ctx.fillRect(place, place, size*1.25, size*1.25);
+		ctx.textAlign = "center";
+		ctx.fillStyle = "black";
+		ctx.font = "bold " + size * 0.3 + "px Arial";
+		ctx.fillText("Thief", place+size*0.625, place+size*0.625);
+		ctx.fillText("7", place+size*0.625, place+size*0.625+50);
+		ctx.font = "italic " + size * 0.25 + "px Arial";
+		ctx.fillText("Cut out", place+size*0.625, place+size*1.5+10);
+	}
+	
+	function rules() {
+		//Create rules
+		var rules = document.createElement("canvas");
+		rules.width = "2700";
+		rules.height = "1225";
+		rules.className = "rules";
+		document.getElementById("board").appendChild(rules);
+		rtx = rules.getContext("2d");
+		rtx.lineWidth = 10;
+		rtx.strokeRect(0, 0, 2700, 1225);
+		
+		//Set text color and size
+		rtx.fillStyle = "black";
+		
+		//Number of pieces
+		rtx.font = "italic " + size * 0.3 + "px Arial";
+		rtx.fillText("15x", 50, 150);
+		rtx.fillText("5x", 50, 350);
+		rtx.fillText("4x", 50, 550);
+		
+		rtx.font = "bold " + size * 0.3 + "px Arial";
+		//Numbers of VP
+		rtx.fillText("0 VP", 200, 150);
+		rtx.fillText("1 VP", 200, 350);
+		rtx.fillText("2 VP", 200, 550);
+		rtx.fillText("# VP", 200, 750);
+		
+		
+		//Road
+		rtx.beginPath();
+		rtx.rect(400, 125, 150, 10);
+		rtx.stroke();
+		
+		//House
+		rtx.beginPath();
+		rtx.arc(475, 325, 75, 0, 2 * Math.PI);
+		rtx.stroke();
+		
+		//City
+		rtx.beginPath();
+		rtx.arc(475, 525, 75, 0, 2 * Math.PI);
+		rtx.textAlign = "center";
+		rtx.font = "bold " + size * 0.9 + "px Arial";
+		rtx.fillText("X", 475, 585);
+		rtx.stroke();
+		
+		//Card
+		rtx.beginPath();
+		rtx.rect(425, 650, 100, 150);
+		rtx.stroke();
+		
+		//Text
+		rtx.textAlign = "left";
+		rtx.font = "bold " + size * 0.3 + "px Arial";
+		rtx.fillText("Road", 600, 150);
+		rtx.fillText("House", 600, 350);
+		rtx.fillText("City", 600, 550);
+		rtx.fillText("Card", 600, 750);
+		
+		//Spacers
+		for (var i = 150; i <= 800; i+= 200) rtx.fillText(":", 825, i);
+		
+		//Road
+		material(925, 75, 100, "Forest", rtx);
+		material(1075, 75, 100, "Hill", rtx);
+		
+		//House
+		material(925, 275, 100, "Forest", rtx);
+		material(1075, 275, 100, "Hill", rtx);
+		material(1225, 275, 100, "Field", rtx);
+		material(1375, 275, 100, "Pasture", rtx);
+		
+		//City
+		material(925, 475, 100, "Field", rtx);
+		material(1075, 475, 100, "Field", rtx);
+		material(1225, 475, 100, "Mountain", rtx);
+		material(1375, 475, 100, "Mountain", rtx);
+		material(1525, 475, 100, "Mountain", rtx);
+		
+		//Card
+		material(925, 675, 100, "Field", rtx);
+		material(1075, 675, 100, "Pasture", rtx);
+		material(1225, 675, 100, "Mountain", rtx);
+		
+		//Seperator
+		rtx.beginPath();
+		rtx.rect(1700, 25, 5, 800);
+		rtx.fillStyle = "#E0E0E0";
+		rtx.stroke();
+		rtx.fill();
+		
+		//Card value
+		rtx.textAlign = "left";
+		rtx.fillStyle = "black";
+		rtx.font = "bold " + size * 0.3 + "px Arial";
+		rtx.fillText("King: Monopol (2x)", 1770, 150);
+		rtx.fillText("Queen: 2 free resources (2x)", 1770, 300);
+		rtx.fillText("Jack: 2 free roads (2x)", 1770, 450);
+		rtx.fillText("2/Ace: 1 Victory point (5x)", 1770, 600);
+		rtx.fillText("3-6: Knight (Move thief) (14x)", 1770, 750);
+		
+		//Extra
+		rtx.textAlign = "center";
+		rtx.fillText("Longest road: 2 victory points with most connected roads, min. 5 roads.", rules.width/2, 900);
+		rtx.fillText("Largest army: 2 victory points with most knights, min. 3 knights.", rules.width/2, 1000);
+		rtx.font = "italic " + size * 0.25 + "px Arial";
+		rtx.fillText("Additional needs: color pencils X number of players, playing cards, 2x dices.", rules.width/2, 1100);
+		rtx.fillText("Thief: Each resource has a number. Role the dice(s), to see what you steal.", rules.width/2, 1175);
+	}
+	
+	//Materials for rules
+	function material(x, y, size, color, space) {
+		space.lineWidth = 10;
+		space.beginPath();
+		space.rect(x, y, size, size);
+		space.fillStyle = colors[color];
+		space.stroke();
+		space.fill();
+		space.textAlign = "center";
+		space.fillStyle = "black";
+		space.font = "bold " + size * 0.3 + "px Arial";
+		if (fit[color] == "Lumber") space.fillText("Lumb", x+size/2, y+size/2);
+		else space.fillText(fit[color], x+size/2, y+size/2);
+	}
+	
+	var bank;
+	function banks() {
+		//Create rules
+		bank = document.createElement("canvas");
+		bank.width = "2700";
+		bank.height = "2500";
+		bank.className = "bank";
+		bank.style.marginTop = "50px";
+		document.getElementById("board").appendChild(bank);
+		btx = bank.getContext("2d");
+		
+		var bx = bank.width/2; by = bank.height/2
+		
+		bankFelt(0, 0, btx);
+		bankFelt(bx, 0, btx);
+		bankFelt(bx, by, btx);
+		bankFelt(0, by, btx);
+		
+		btx.fillStyle = "lightgrey"
+		for (var i = 0; i <= by*2; i+=50) btx.fillRect(10, 0+i, 5, 25);
+		for (var i = 0; i <= by*2; i+=50) btx.fillRect(bx, 0+i, 5, 25);
+		for (var i = 0; i <= by*2; i+=50) btx.fillRect(bx*2-10, 0+i, 5, 25);
+		for (var i = 0; i <= bx*2; i+=50) btx.fillRect(0+i, 10, 25, 5);
+		for (var i = 0; i <= bx*2; i+=50) btx.fillRect(0+i, by, 25, 5);
+		for (var i = 0; i <= bx*2; i+=50) btx.fillRect(0+i, by*2-10, 25, 5);
+	}
+	
+	function bankFelt(bx, by, btx) {
+		var size = 200
+		material(bx+75, by+50, size, "Forest", btx);
+		material(bx+325, by+50, size, "Hill", btx);
+		material(bx+575, by+50, size, "Field", btx);
+		material(bx+825, by+50, size, "Pasture", btx);
+		material(bx+1075, by+50, size, "Mountain", btx);
+		
+		for (var i = 0; i < 4; i++) btx.fillRect(bx+(300+i*size+i*50), by+45, 5, bank.height/2-175);
+		
+		btx.fillRect(bx+25, by+size+50*2, bx+bank.width/2-35, 5);
+		
+		btx.font = "bold " + size * 0.3 + "px Arial";
+		btx.textAlign = "left";
+		btx.fillText("Player:", bx+50, by+bank.height/2-45);
+	}
+
+</script>
+</head>
+<body>
+<center>
+<input id="counting" type="number" value="1" min="1" max="49" style="width:50px">
+<input type="button" value="Make" onclick="createAndPrint()">
+<div id="board"></div>
+</center>
+</body>
+</html>
