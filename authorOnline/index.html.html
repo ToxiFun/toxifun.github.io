@@ -1,0 +1,52 @@
+﻿<html>
+<head>
+	<script type="text/javascript" src="author.json"></script>
+    <script rel="javaScript" type="text/javascript" src="author.js"></script>
+	<link rel="stylesheet" type="text/css" href="author.css">
+
+	<script>
+		var cards = JSON.parse(JSON.stringify(JSONcards));
+        var color = JSON.parse(JSON.stringify(categoryColor));
+
+		function go() {
+			for (var expan in cards) {
+				for (var cat in cards[expan]) {
+					makeBack(expan, cat)
+					for (var card = 0; card < cards[expan][cat].length; card++) {
+						//makeFront(expan, cat, card);
+					}
+				}
+			}
+        }
+	</script>
+</head>
+<body onload="go()">
+    <table id="backInput"></table>
+    <table id="frontInput"></table>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+    <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
+    authDomain: "author-online-77a3f.firebaseapp.com",
+    databaseURL: "https://author-online-77a3f.firebaseio.com",
+    projectId: "author-online-77a3f",
+    storageBucket: "author-online-77a3f.appspot.com",
+    messagingSenderId: "38832959503",
+    appId: "1:38832959503:web:075000dabf3de5aeff737a",
+    measurementId: "G-M9MHS63XZ8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+    </script>
+
+</body>
+</html>

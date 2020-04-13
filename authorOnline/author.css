@@ -1,0 +1,180 @@
+﻿body {
+    margin: 0;
+    padding: 0px;
+    font-family: sans-serif;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.page {
+    width: 19.6406cm;
+    padding: 0px;
+    margin: 0px;
+}
+
+@media print {
+    .pagebreak {
+        page-break-after: always;
+    }
+    /* page-break-after works, as well */
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 1.6cm;
+    }
+
+    body, html, #wrapper {
+        width: 100%;
+        margin-top: 40px;
+    }
+}
+
+.intro {
+    height: 29cm;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+    .intro div {
+        padding: 0px 50px 50px 50px;
+        text-align: justify;
+        margin-top: 25%;
+    }
+
+#intro p span {
+    padding: 5px;
+    text-align: center;
+}
+
+#credit ul {
+    text-align: left;
+    padding: 0px 50px 0px 50px;
+}
+
+.pagebreak {
+    width: 21cm;
+    height: 1px;
+    background-color: lightblue;
+}
+
+.card {
+    display: block;
+    float: left;
+    width: 220px;
+    height: 265px;
+    text-align: center;
+    border: 1px solid grey;
+    overflow: auto;
+    overflow-y: hidden;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+}
+
+.back {
+    position: absolute;
+    width: 220px;
+    height: 265px;
+    float: left;
+    margin-left: -210px;
+    z-index: -5;
+}
+
+.color {
+    width: 10px;
+    height: 50px;
+    border-radius: 0px 0px 10px 0px;
+    margin-left: -210px;
+}
+
+.element {
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: -40px;
+}
+
+.numberId {
+    position: relative;
+    text-align: left;
+    font-size: 9px;
+    color: grey;
+    margin-top: -10px;
+    margin-left: 5px;
+}
+
+.line {
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-top: -25px;
+    width: 200px;
+    height: 1.5px;
+}
+
+.category, backCategory {
+    font-size: 18px;
+    text-align: center;
+    margin: -15.85px 0px 0px 0px;
+}
+
+.sideElement {
+    color: grey;
+    margin-left: 210px;
+    margin-top: 8.5px;
+    width: 60%;
+    height: 20px;
+    transform-origin: 0 0;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg); /* Safari */
+    -moz-transform: rotate(90deg); /* Firefox */
+    -ms-transform: rotate(90deg); /* IE */
+    -o-transform: rotate(90deg); /* Opera */
+}
+
+.image {
+    width: 115px;
+    height: 115px;
+    border: 1px solid grey;
+    padding: 10px;
+    margin-top: -35px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.expansion {
+    margin-top: 10px;
+    color: grey;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.sideColorFront, .sideColorBack {
+    width: 10px;
+    height: 50px;
+    margin-left: 210px;
+    margin-top: -49px;
+    border-radius: 10px 0px 0px 0px;
+}
+
+.sideColorBack {
+    margin-top: 21px;
+}
+
+.backCategory {
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.title {
+    font-size: 37.5px;
+    font-weight: 800;
+    margin-top: -10px;
+}

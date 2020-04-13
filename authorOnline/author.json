@@ -43,8 +43,14 @@ var JSONcards = {
 			"Storming",
 			"Time passed",
 			"Transforming",
-			"Tripping"
-		], "Personality": [
+			"Tripping",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
+		],
+		"Feature": [
 			"Angry",
 			"Ashame",
 			"Awkward",
@@ -99,8 +105,14 @@ var JSONcards = {
 			"Ugly",
 			"Wanted",
 			"Wise",
-			"Worried"
-		], "Condition": [
+			"Worried",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
+		],
+		"Disability": [
 			"Back pain",
 			"Blinded",
 			"Blood loss",
@@ -131,10 +143,16 @@ var JSONcards = {
 			"Toxic poisoned",
 			"Unconscious",
 			"Vanished",
-			"Wanted"
+			"Wanted",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
 		]
-	}, "Fairytale": {
-		"Thing": [
+	},
+	"Fairytale": {
+		"Object": [
 			"A trap",
 			"A well",
 			"Antitoxin potion",
@@ -201,8 +219,14 @@ var JSONcards = {
 			"Wagon",
 			"Wall",
 			"Whip",
-			"Window"
-		], "Character": [
+			"Window",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
+		],
+		"Character": [
 			"Archer",
 			"Beast",
 			"Beggar",
@@ -245,8 +269,14 @@ var JSONcards = {
 			"Wife",
 			"Witch",
 			"Wizard",
-			"Wolf"
-		], "Location": [
+			"Wolf",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
+		],
+		"Location": [
 			"Abandoned town",
 			"Basement",
 			"Blacksmith",
@@ -266,7 +296,6 @@ var JSONcards = {
 			"Lake",
 			"Market",
 			"Mountain",
-			"Day/night",
 			"Palace",
 			"Ritual table",
 			"River",
@@ -277,7 +306,44 @@ var JSONcards = {
 			"Tresuare room",
 			"Village",
 			"Waterfall",
-			"Workshop"
+			"Workshop",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________",
+			"_____________"
 		]
 	}
 }
+
+var categoryColor = {
+		"Event": "rgb(222, 162, 33)", //ORANGE
+		"Feature": "rgb(130, 16, 122)", //PURPLE
+		"Disability": "rgb(201, 18, 18)", //RED
+		"Object": "rgb(21, 194, 30)", //GREEN
+		"Character": "rgb(238, 245, 29)", //YELLOW
+		"Location": "rgb(31, 117, 255)" //BLUE
+}
+
+/*
+DELETED
+{
+	"Base": {
+		"Event": [
+		],
+		"Feature": [
+		],
+		"Disability": [
+		]
+	},
+	"Fairytale": {
+		"Object": [
+		],
+		"Character": [
+		],
+		"Location": [
+			"Day/night",
+		]
+	}
+}
+*/
