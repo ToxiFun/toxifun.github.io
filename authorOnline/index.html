@@ -1,1 +1,246 @@
+<html>
+<head>
+<script type="text/javascript" src="author.json"></script>
 
+<script>
+var cards = JSON.parse(JSON.stringify(JSONcards));
+var color = {
+	"Event": "rgb(221, 162, 32)",
+	"Personality": "rgb(129, 16, 122)",
+	"Condition": "rgb(202, 18, 18)",
+	"Thing": "rgb(22, 194, 30)",
+	"Character": "rgb(238, 245, 28)",
+	"Location": "rgb(31, 117, 255)",
+}
+
+function start() {
+	for (var expan in cards) {
+		for (var cat in cards[expan]) {
+			makeCardBack(expan, cat)
+			for (var card = 0; card < cards[expan][cat].length; card++) {
+				//makeCardFront(expan, cat, card);
+				
+			}
+		}
+	}
+}
+
+function makeCardFront(expan, cat, card, status) {
+	if (cards[expan][cat].length <= 0) return alert("No more " + cat + " cards.");
+	
+	var newCard = document.createElement("div");
+	var title = document.createElement("div");
+	var seperator = document.createElement("div");
+	var upperCornerColor = document.createElement("div");
+	var cardID = document.createElement("div");
+	var frontCategory = document.createElement("div");
+	var image = document.createElement("div");
+	var sideTitle = document.createElement("div");
+	var expansion = document.createElement("div");
+	var lowerCornerColor = document.createElement("div");
+	
+	title.innerHTML = cards[expan][cat][card];
+	upperCornerColor.style.backgroundColor = color[cat];
+	cardID.innerHTML = expan.substring(0, 1) + cat.substring(0, 1) + card;
+	frontCategory.innerHTML = cat;
+	image.innerHTML = "Empty";
+	sideTitle.innerHTML = cards[expan][cat][card];
+	expansion.innerHTML = "Expansion: " + expan;
+	lowerCornerColor.style.backgroundColor = color[cat];
+	
+	title.classList.add("title");
+	upperCornerColor.classList.add("FrontUpperCornerColor");
+	upperCornerColor.classList.add("cornerColor");
+	cardID.classList.add("cardID");
+	frontCategory.classList.add("frontCategory");
+	image.classList.add("image");
+	sideTitle.classList.add("sideTitle");
+	expansion.classList.add("expansion");
+	lowerCornerColor.classList.add("FrontLowerCornerColor");
+	lowerCornerColor.classList.add("cornerColor");
+	
+	newCard.append(title);
+	newCard.append(upperCornerColor);
+	newCard.append(cardID);
+	newCard.append(frontCategory);
+	newCard.append(image);
+	newCard.append(sideTitle);
+	newCard.append(expansion);
+	newCard.append(lowerCornerColor);
+	
+	newCard.onmousedown = function() {
+		if (this.id == "" && !document.getElementById("drag")) this.id = "drag";
+	}
+	newCard.onmouseup = function() {
+		if (this.id == "drag") {
+			this.id = "";
+			this.style.zIndex = "1";
+		}
+	}
+	
+	newCard.classList.add("cards");
+	document.getElementById("frontInput").append(newCard);
+	
+	if (status == 'pick') {
+		cards[expan][cat].splice(cards[expan][cat][card], 1);
+		newCard.classList.add("pick");
+	}
+}
+
+function makeCardBack(expan, cat) {
+	var newCard = document.createElement("th");
+	var gameTitle = document.createElement("div");
+	var upperCornerColor = document.createElement("div");
+	var backCategory = document.createElement("div");
+	var lowerCornerColor = document.createElement("div");
+	
+	gameTitle.innerHTML = "AUTHOR";
+	upperCornerColor.style.backgroundColor = color[cat];
+	backCategory.innerHTML = cat;
+	lowerCornerColor.style.backgroundColor = color[cat];
+	
+	gameTitle.classList.add("gameTitle");
+	upperCornerColor.classList.add("BackUpperCornerColor");
+	upperCornerColor.classList.add("cornerColor");
+	backCategory.classList.add("backCategory");
+	lowerCornerColor.classList.add("BackLowerCornerColor");
+	lowerCornerColor.classList.add("cornerColor");
+	
+	newCard.append(gameTitle);
+	newCard.append(upperCornerColor);
+	newCard.append(backCategory);
+	newCard.append(lowerCornerColor);
+	
+	newCard.onclick = function() { var randomCard = Math.floor(Math.random() * cards[expan][cat].length); makeCardFront(expan, cat, randomCard, 'pick'); }
+	newCard.classList.add("cards");
+	document.getElementById("backInput").append(newCard);
+}
+
+window.onmousemove = function(event){
+	if (document.getElementById("drag")) {
+		var x = event.clientX;
+		var y = event.clientY;
+		var drag = document.getElementById("drag");
+	  
+		drag.style.position = "absolute";
+		drag.style.zIndex = "10";
+		drag.style.left = x - drag.offsetWidth / 2 + "px";
+		drag.style.top = y - drag.offsetHeight / 2 + "px";
+	}
+}
+
+	</script>
+	
+	<style>
+	
+	body {
+	}
+	
+	.cards {
+		height: 175px;
+		width: 175px;
+		border: 1px solid black;
+		border-radius: 10px;
+		position: relative;
+		padding: 0px;
+		margin: 10px;
+		z-index: 1;
+		background-color: rgb(255, 255, 255);
+	}
+	
+	.frontUpperCornerColor {
+		float: left;
+	}
+	
+	.title {
+		text-align: center; 
+	}
+	
+	.cardID {
+		
+	}
+	
+	.frontCategory {
+		text-align: center; 
+	}
+	
+	.image {
+		text-align: center; 
+	}
+	
+	.sideTitle {
+		
+	}
+	
+	.expansion {
+		text-align: center; 
+	}
+	
+	.frontLowerCornerColor {
+		float: right;
+	}
+	
+	.BackUpperCornerColor {
+		float: left;
+		margin-top: -85.9px;
+	}
+	
+	.gameTitle {
+		font-size: 27.5px;
+		text-align: center;
+		margin-top: 30%;		
+	}
+	
+	.BackLowerCornerColor {
+		float: right;
+		margin-top: 32.9px;
+	}
+	
+	.backCategory {
+		text-align: center;
+		margin-right: 10px;
+	}
+	
+	
+	.cornerColor {
+		height: 50px;
+		width: 10px;
+		border-radius: 25px 0px 25px 0px;
+	}
+	
+	table {
+		text-align: center;
+	}
+	
+	</style>
+</head>
+<body onload="start()">
+	<table id="backInput"></table>
+	<table id="frontInput"></table>
+	
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
+    authDomain: "author-online-77a3f.firebaseapp.com",
+    databaseURL: "https://author-online-77a3f.firebaseio.com",
+    projectId: "author-online-77a3f",
+    storageBucket: "author-online-77a3f.appspot.com",
+    messagingSenderId: "38832959503",
+    appId: "1:38832959503:web:075000dabf3de5aeff737a",
+    measurementId: "G-M9MHS63XZ8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+	
+</body>
+</html>
