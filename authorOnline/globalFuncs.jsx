@@ -20,6 +20,8 @@ function removeOnMouseLeave(event, elem) {
 }
 
 function newActivity() {
+
+    /*
     //Make activity id number
     var actIdLength = 10;
     var noGoId = [58, 59, 60, 61, 62, 63, 64, 91, 92, 93, 94, 95, 96];
@@ -30,9 +32,10 @@ function newActivity() {
             randChar = Math.floor(Math.random() * (122 - 48)) + 48;
         } actId += String.fromCharCode(randChar);
     }
+    */
 
     activity = {
-        "actId": actId,
+        //"actId": actId,
         "interactCount": {},
         "activityLog": []
     }
@@ -68,5 +71,7 @@ function writeActivity(handle, obj1, location, obj2) {
 }
 
 function sendActivity(reason) {
-    console.log("Failed sending after " + reason);
+    writeActivity("End", "activityLog", "becuase", reason);
+    writeActivity("Send", "activityLog", "to", "dataBase");
+    ref.push(activity);
 }

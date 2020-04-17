@@ -1,12 +1,15 @@
 ﻿<html>
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
     <script type="application/javascript" src="cards.json"></script>
     <script type="application/javascript" src="commands.json"></script>
     <script rel="javaScript" type="text/javascript" src="globalFuncs.jsx"></script>
     <script rel="javaScript" type="text/javascript" src="elementFuncs.jsx"></script>
     <script rel="javaScript" type="text/javascript" src="makeCards.jsx"></script>
     <script rel="javaScript" type="text/javascript" src="window.jsx"></script>
+    <script rel="javaScript" type="text/javascript" src="firebase.jsx"></script>
     <link rel="stylesheet" type="text/css" href="author.css">
 
     <script>
@@ -26,44 +29,13 @@
     <table>
         <tr>
             <th rowspan="2"><div id="backInput"></div></th>
-            <th><div id="dice" onclick="roleDice()"></th>
-            <th><div id="settings" onclick="openSettings(event)">S</th>
+            <th><div id="dice" onclick="roleDice()"></div></th>
+            <th><div id="settings" onclick="openSettings(event)">S</div></th>
         </tr>
         <tr>
             <td colspan="2"><div id="discard" onclick="getDiscard(event)"><p class="element" style="margin-top:40px"></p></div></td>
         </tr>
     </table>
     <div id="cardsInput"></div>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        var config = {
-            apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
-            authDomain: "author-online-77a3f.firebaseapp.com",
-            databaseURL: "https://author-online-77a3f.firebaseio.com",
-            projectId: "author-online-77a3f",
-            storageBucket: "author-online-77a3f.appspot.com",
-            messagingSenderId: "38832959503",
-            appId: "1:38832959503:web:075000dabf3de5aeff737a",
-            measurementId: "G-M9MHS63XZ8"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(config);
-        var database = firebase.database();
-        var ref = database.ref("activityLog");
-
-        var data = {
-            id: "idTest",
-            data: "test"
-        }
-
-        ref.push(data);
-    </script>
-
 </body>
 </html>
