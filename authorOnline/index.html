@@ -1,8 +1,8 @@
 ﻿<html>
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <script type="text/javascript" src="cards.json"></script>
-    <script type="text/javascript" src="commands.json"></script>
+    <script type="application/javascript" src="cards.json"></script>
+    <script type="application/javascript" src="commands.json"></script>
     <script rel="javaScript" type="text/javascript" src="globalFuncs.jsx"></script>
     <script rel="javaScript" type="text/javascript" src="elementFuncs.jsx"></script>
     <script rel="javaScript" type="text/javascript" src="makeCards.jsx"></script>
@@ -44,7 +44,7 @@
 
     <script>
         // Your web app's Firebase configuration
-        var firebaseConfig = {
+        var config = {
             apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
             authDomain: "author-online-77a3f.firebaseapp.com",
             databaseURL: "https://author-online-77a3f.firebaseio.com",
@@ -55,11 +55,16 @@
             measurementId: "G-M9MHS63XZ8"
         };
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        var ref = database.ref("activityLog");
 
-        firebase.analytics().logEvent('notification_received');
+        var data = {
+            id: "idTest",
+            data: "test"
+        }
 
+        ref.push(data);
     </script>
 
 </body>
