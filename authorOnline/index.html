@@ -1,28 +1,39 @@
 ﻿<html>
 <head>
-	<script type="text/javascript" src="author.json"></script>
-    <script rel="javaScript" type="text/javascript" src="author.js"></script>
-	<link rel="stylesheet" type="text/css" href="author.css">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <script type="text/javascript" src="cards.json"></script>
+    <script type="text/javascript" src="commands.json"></script>
+    <script rel="javaScript" type="text/javascript" src="globalFuncs.jsx"></script>
+    <script rel="javaScript" type="text/javascript" src="elementFuncs.jsx"></script>
+    <script rel="javaScript" type="text/javascript" src="makeCards.jsx"></script>
+    <script rel="javaScript" type="text/javascript" src="window.jsx"></script>
+    <link rel="stylesheet" type="text/css" href="author.css">
 
-	<script>
-		var cards = JSON.parse(JSON.stringify(JSONcards));
-        var color = JSON.parse(JSON.stringify(categoryColor));
-
-		function go() {
-			for (var expan in cards) {
-				for (var cat in cards[expan]) {
-					makeBack(expan, cat)
-					for (var card = 0; card < cards[expan][cat].length; card++) {
-						//makeFront(expan, cat, card);
-					}
-				}
-			}
+    <script>
+        function go() {
+            for (var expan in cards) {
+                for (var cat in cards[expan]) {
+                    makeBack(expan, cat);
+                }
+            }
+            roleDice(true);
+            document.getElementById("discard").children[0].innerHTML = commands["Discard"][language];
+            newActivity();
         }
-	</script>
+    </script>
 </head>
 <body onload="go()">
-    <table id="backInput"></table>
-    <table id="frontInput"></table>
+    <table>
+        <tr>
+            <th rowspan="2"><div id="backInput"></div></th>
+            <th><div id="dice" onclick="roleDice()"></th>
+            <th><div id="settings" onclick="openSettings(event)">S</th>
+        </tr>
+        <tr>
+            <td colspan="2"><div id="discard" onclick="getDiscard(event)"><p class="element" style="margin-top:40px"></p></div></td>
+        </tr>
+    </table>
+    <div id="cardsInput"></div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
@@ -32,20 +43,23 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
 
     <script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
-    authDomain: "author-online-77a3f.firebaseapp.com",
-    databaseURL: "https://author-online-77a3f.firebaseio.com",
-    projectId: "author-online-77a3f",
-    storageBucket: "author-online-77a3f.appspot.com",
-    messagingSenderId: "38832959503",
-    appId: "1:38832959503:web:075000dabf3de5aeff737a",
-    measurementId: "G-M9MHS63XZ8"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyB_WPaWYk2Z0XJX2Bhhyevznjx-FygeTnM",
+            authDomain: "author-online-77a3f.firebaseapp.com",
+            databaseURL: "https://author-online-77a3f.firebaseio.com",
+            projectId: "author-online-77a3f",
+            storageBucket: "author-online-77a3f.appspot.com",
+            messagingSenderId: "38832959503",
+            appId: "1:38832959503:web:075000dabf3de5aeff737a",
+            measurementId: "G-M9MHS63XZ8"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        firebase.analytics().logEvent('notification_received');
+
     </script>
 
 </body>

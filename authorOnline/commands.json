@@ -1,0 +1,96 @@
+var JSONcommands = {
+	"Discard": {
+		"English": "Discard",
+		"Dansk": "Fjern"
+	},
+	"Empty": {
+		"English": "Empty",
+		"Dansk": "Tom"
+	}, "New_game": {
+		"English": "New game",
+		"Dansk": "Nyt spil"
+	},
+	"Save_game": {
+		"English": "Save game",
+		"Dansk": "Gem spil"
+	},
+	"Load_game": {
+		"English": "Load game",
+		"Dansk": "Load spil"
+	},
+	"Language": {
+		"English": "Language",
+		"Dansk": "Sprog"
+	},
+	"Base": {
+		"English": "Base",
+		"Dansk": "Grundpakke"
+	},
+	"Event": {
+		"English": "Event",
+		"Dansk": "H\u00e6ndelse"
+	},
+	"Feature": {
+		"English": "Feature",
+		"Dansk": "Karaktertr\u00e6k"
+	},
+	"Disability": {
+		"English": "Disability",
+		"Dansk": "Handicap"
+	},
+	"Fairytale": {
+		"English": "Fairytale",
+		"Dansk": "Eventyr"
+	},
+	"Object": {
+		"English": "Object",
+		"Dansk": "Genstand"
+	},
+	"Character": {
+		"English": "Character",
+		"Dansk": "Karakter"
+	},
+	"Location": {
+		"English": "Location",
+		"Dansk": "Lokation"
+	}
+}; var JSONcategoryColor = {
+	"Event": "rgb(222, 162, 33)", //ORANGE
+	"Feature": "rgb(130, 16, 122)", //PURPLE
+	"Disability": "rgb(201, 18, 18)", //RED
+	"Object": "rgb(21, 194, 30)", //GREEN
+	"Character": "rgb(238, 245, 29)", //YELLOW
+	"Location": "rgb(31, 117, 255)", //BLUE
+
+	"H\u00e6ndelse": "rgb(222, 162, 33)", //ORANGE
+	"Karaktertr\u00e6k": "rgb(130, 16, 122)", //PURPLE
+	"Handicap": "rgb(201, 18, 18)", //RED
+	"Genstand": "rgb(21, 194, 30)", //GREEN
+	"Karakter": "rgb(238, 245, 29)", //YELLOW
+	"Lokation": "rgb(31, 117, 255)" //BLUE
+}; var JSONdiscardPile = [];
+
+/*
+DELETED
+{
+"Base": {
+"Event": [
+],
+"Feature": [
+],
+"Disability": [
+"Toxic poisoned",
+]
+},
+"Fairytale": {
+"Object": [
+],
+"Character": [
+],
+"Location": [
+"Day/night",
+]
+}
+}
+*/
+

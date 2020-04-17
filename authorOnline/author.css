@@ -42,11 +42,11 @@
     font-family: "Times New Roman", Times, serif;
 }
 
-    .intro div {
-        padding: 0px 50px 50px 50px;
-        text-align: justify;
-        margin-top: 25%;
-    }
+.intro div {
+    padding: 0px 50px 50px 50px;
+    text-align: justify;
+    margin-top: 25%;
+}
 
 #intro p span {
     padding: 5px;
@@ -64,7 +64,7 @@
     background-color: lightblue;
 }
 
-.card {
+.card, .backCard {
     display: block;
     float: left;
     width: 220px;
@@ -75,6 +75,7 @@
     overflow-y: hidden;
     border-radius: 15px;
     background-color: rgb(255, 255, 255);
+    z-index: -1;
 }
 
 .back {
@@ -177,4 +178,66 @@
     font-size: 37.5px;
     font-weight: 800;
     margin-top: -10px;
+}
+
+#dice {
+    width: 75px;
+    height: 75px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25%;
+}
+
+.dot {
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background: black;
+    position: absolute;
+}
+
+#settings {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25%;
+}
+
+.setting {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.pickedLang {
+    background-color: grey;
+}
+
+#discard {
+    display: block;
+    float: left;
+    width: 120px;
+    height: 165px;
+    text-align: center;
+    border: 1px solid grey;
+    overflow: auto;
+    overflow-y: hidden;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+}
+
+#getDiscardPile, #getSettings {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid grey;
+    position: absolute;
+    padding: 3px;
+}
+
+.discardedCard {
+    border: 1px solid black;
+    padding-right: 15px;
+}
+
+.discardedCard:hover, .setting:hover {
+    background-color: lightgrey;
 }

@@ -1,0 +1,1210 @@
+var JSONcards = {
+	"Base": {
+		"Event": {
+			"BE01": {
+				"English": "Accusing",
+				"Dansk": "Beskylder"
+			},
+			"BE02": {
+				"English": "Arguing",
+				"Dansk": "Diskuter"
+			},
+			"BE03": {
+				"English": "Attacking",
+				"Dansk": "Angriber"
+			},
+			"BE04": {
+				"English": "Beating",
+				"Dansk": "Sl\u00e5r"
+			},
+			"BE05": {
+				"English": "Begging",
+				"Dansk": "Tigger"
+			},
+			"BE06": {
+				"English": "Biting",
+				"Dansk": "Bider"
+			},
+			"BE07": {
+				"English": "Building",
+				"Dansk": "Bygger"
+			},
+			"BE08": {
+				"English": "Chasing",
+				"Dansk": "Jagter"
+			},
+			"BE09": {
+				"English": "Competing",
+				"Dansk": "K\u00e6mper"
+			},
+			"BE10": {
+				"English": "Creating",
+				"Dansk": "Skaber"
+			},
+			"BE11": {
+				"English": "Discovering",
+				"Dansk": "Opdager"
+			},
+			"BE12": {
+				"English": "Diving",
+				"Dansk": "Dykker"
+			},
+			"BE13": {
+				"English": "Dying",
+				"Dansk": "D\u00f8r"
+			},
+			"BE14": {
+				"English": "Escaping",
+				"Dansk": "Flygter"
+			},
+			"BE15": {
+				"English": "Exploring",
+				"Dansk": "Opdager"
+			},
+			"BE16": {
+				"English": "Falling",
+				"Dansk": "Falder"
+			},
+			"BE17": {
+				"English": "Falling in love",
+				"Dansk": "Forelskes"
+			},
+			"BE18": {
+				"English": "Fighting",
+				"Dansk": "Sl\u00e5s"
+			},
+			"BE19": {
+				"English": "Finding",
+				"Dansk": "Finder"
+			},
+			"BE20": {
+				"English": "Getting an idea",
+				"Dansk": "F\u00e5r en idé"
+			},
+			"BE21": {
+				"English": "Getting hurt",
+				"Dansk": "Kommer til skade"
+			},
+			"BE22": {
+				"English": "Getting lost",
+				"Dansk": "Fare vild"
+			},
+			"BE23": {
+				"English": "Hiding",
+				"Dansk": "Gemmer"
+			},
+			"BE24": {
+				"English": "Imprisoned",
+				"Dansk": "F\u00e6ngslet"
+			},
+			"BE25": {
+				"English": "It breaks",
+				"Dansk": "G\u00e5r i stykker"
+			},
+			"BE26": {
+				"English": "It comes alive",
+				"Dansk": "Kommer til live"
+			},
+			"BE27": {
+				"English": "It is revealed",
+				"Dansk": "Afsl\u00f8ret"
+			},
+			"BE28": {
+				"English": "Meeting",
+				"Dansk": "M\u00f8des"
+			},
+			"BE29": {
+				"English": "Parting ways",
+				"Dansk": "Afsked"
+			},
+			"BE30": {
+				"English": "Planning",
+				"Dansk": "Planl\u00e6gger"
+			},
+			"BE31": {
+				"English": "Pushing",
+				"Dansk": "Skubber"
+			},
+			"BE32": {
+				"English": "Rescuing",
+				"Dansk": "Redder"
+			},
+			"BE33": {
+				"English": "Returning",
+				"Dansk": "Tilbagevender"
+			},
+			"BE34": {
+				"English": "Running",
+				"Dansk": "L\u00f8ber"
+			},
+			"BE35": {
+				"English": "Rushing",
+				"Dansk": "Farende"
+			},
+			"BE36": {
+				"English": "Scouting",
+				"Dansk": "Spejder"
+			},
+			"BE37": {
+				"English": "Screaming",
+				"Dansk": "Skriger"
+			},
+			"BE38": {
+				"English": "Selling",
+				"Dansk": "S\u00e6lger"
+			},
+			"BE39": {
+				"English": "Sleeping",
+				"Dansk": "Sover"
+			},
+			"BE40": {
+				"English": "Storming",
+				"Dansk": "Stormer"
+			},
+			"BE41": {
+				"English": "Time passed",
+				"Dansk": "Tid forl\u00f8ber"
+			},
+			"BE42": {
+				"English": "Transforming",
+				"Dansk": "Transformerer"
+			},
+			"BE43": {
+				"English": "Tripping",
+				"Dansk": "Snubler"
+			},
+			"BE44": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BE45": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BE46": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BE47": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BE48": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		},
+		"Feature": {
+			"BF01": {
+				"English": "Angry",
+				"Dansk": "Sur"
+			},
+			"BF02": {
+				"English": "Ashame",
+				"Dansk": "Skamfuld"
+			},
+			"BF03": {
+				"English": "Awkward",
+				"Dansk": "Akavet"
+			},
+			"BF04": {
+				"English": "Beautiful",
+				"Dansk": "Smuk"
+			},
+			"BF05": {
+				"English": "Blind",
+				"Dansk": "Blind"
+			},
+			"BF06": {
+				"English": "Bored",
+				"Dansk": "Keder sig"
+			},
+			"BF07": {
+				"English": "Brave",
+				"Dansk": "Modig"
+			},
+			"BF08": {
+				"English": "Can fly",
+				"Dansk": "Flyvende"
+			},
+			"BF09": {
+				"English": "Can talk",
+				"Dansk": "Snaksaglig"
+			},
+			"BF10": {
+				"English": "Confident",
+				"Dansk": "Selvsikker"
+			},
+			"BF11": {
+				"English": "Confused",
+				"Dansk": "Forviret"
+			},
+			"BF12": {
+				"English": "Crazy",
+				"Dansk": "Sk\u00f8r"
+			},
+			"BF13": {
+				"English": "Creepy",
+				"Dansk": "Uhyggelig"
+			},
+			"BF14": {
+				"English": "Curious",
+				"Dansk": "Nysgerrig"
+			},
+			"BF15": {
+				"English": "Cursed",
+				"Dansk": "Forbandet"
+			},
+			"BF16": {
+				"English": "Depressed",
+				"Dansk": "Deprimeret"
+			},
+			"BF17": {
+				"English": "Determined",
+				"Dansk": "Beslutsom"
+			},
+			"BF18": {
+				"English": "Disguised",
+				"Dansk": "Forkl\u00e6dt"
+			},
+			"BF19": {
+				"English": "Drunk",
+				"Dansk": "Fuld"
+			},
+			"BF20": {
+				"English": "Envying",
+				"Dansk": "Misunder"
+			},
+			"BF21": {
+				"English": "Evil",
+				"Dansk": "Ond"
+			},
+			"BF22": {
+				"English": "Excited",
+				"Dansk": "Begejstret"
+			},
+			"BF23": {
+				"English": "Foolish",
+				"Dansk": "Dumdrastig"
+			},
+			"BF24": {
+				"English": "Friendly",
+				"Dansk": "Venlig"
+			},
+			"BF25": {
+				"English": "Frightened",
+				"Dansk": "Bange"
+			},
+			"BF26": {
+				"English": "Happy",
+				"Dansk": "Glad"
+			},
+			"BF27": {
+				"English": "Healed",
+				"Dansk": "Helbredt"
+			},
+			"BF28": {
+				"English": "Helpful",
+				"Dansk": "Hj\u00e6lpsom"
+			},
+			"BF29": {
+				"English": "Hidden",
+				"Dansk": "Skjult"
+			},
+			"BF30": {
+				"English": "Hungry",
+				"Dansk": "Sulten"
+			},
+			"BF31": {
+				"English": "Ignorant",
+				"Dansk": "Ignorant"
+			},
+			"BF32": {
+				"English": "In love",
+				"Dansk": "Forelsket"
+			},
+			"BF33": {
+				"English": "Interested",
+				"Dansk": "Interesseret"
+			},
+			"BF34": {
+				"English": "Irritated",
+				"Dansk": "Irriteret"
+			},
+			"BF35": {
+				"English": "Lost",
+				"Dansk": "Fortabt"
+			},
+			"BF36": {
+				"English": "Lucky",
+				"Dansk": "Heldig"
+			},
+			"BF37": {
+				"English": "Motivated",
+				"Dansk": "Motiveret"
+			},
+			"BF38": {
+				"English": "Offensive",
+				"Dansk": "Offensiv"
+			},
+			"BF39": {
+				"English": "Peaceful",
+				"Dansk": "Fredsfuld"
+			},
+			"BF40": {
+				"English": "Poisoned",
+				"Dansk": "Forgiftet"
+			},
+			"BF41": {
+				"English": "Polite",
+				"Dansk": "H\u00f8flig"
+			},
+			"BF42": {
+				"English": "Protective",
+				"Dansk": "Beskyttende"
+			},
+			"BF43": {
+				"English": "Romantic",
+				"Dansk": "Romantisk"
+			},
+			"BF44": {
+				"English": "Sad",
+				"Dansk": "Ked af det"
+			},
+			"BF45": {
+				"English": "Scared",
+				"Dansk": "Skr\u00e6mt"
+			},
+			"BF46": {
+				"English": "Scary",
+				"Dansk": "Skr\u00e6mmende"
+			},
+			"BF47": {
+				"English": "Secretive",
+				"Dansk": "Hemmelighedsfuld"
+			},
+			"BF48": {
+				"English": "Selfconscious",
+				"Dansk": "Selvbevidst"
+			},
+			"BF49": {
+				"English": "Strong",
+				"Dansk": "St\u00e6rk"
+			},
+			"BF50": {
+				"English": "Terrified",
+				"Dansk": "R\u00e6dselsslagen"
+			},
+			"BF51": {
+				"English": "Tiny",
+				"Dansk": "Lille"
+			},
+			"BF52": {
+				"English": "Ugly",
+				"Dansk": "Grim"
+			},
+			"BF53": {
+				"English": "Wanted",
+				"Dansk": "Efterlyst"
+			},
+			"BF54": {
+				"English": "Wise",
+				"Dansk": "Vis"
+			},
+			"BF55": {
+				"English": "Worried",
+				"Dansk": "Bekymret"
+			},
+			"BF56": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BF57": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BF58": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BF59": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BF60": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		},
+		"Disability": {
+			"BD01": {
+				"English": "Back pain",
+				"Dansk": "Rygsmerte"
+			},
+			"BD02": {
+				"English": "Blinded",
+				"Dansk": "Blind"
+			},
+			"BD03": {
+				"English": "Blood loss",
+				"Dansk": "Blodtab"
+			},
+			"BD04": {
+				"English": "Brain-damaged",
+				"Dansk": "Hjerneskade"
+			},
+			"BD05": {
+				"English": "Broken wrists",
+				"Dansk": "Br\u00e6kket h\u00e5ndled"
+			},
+			"BD06": {
+				"English": "Persuaded",
+				"Dansk": "Overtalt"
+			},
+			"BD07": {
+				"English": "Deafened",
+				"Dansk": "D\u00f8v"
+			},
+			"BD08": {
+				"English": "Death",
+				"Dansk": "D\u00f8d"
+			},
+			"BD09": {
+				"English": "Depressed",
+				"Dansk": "Deprimeret"
+			},
+			"BD10": {
+				"English": "Drunk",
+				"Dansk": "Fuld"
+			},
+			"BD11": {
+				"English": "Exhausted",
+				"Dansk": "Udmattet"
+			},
+			"BD12": {
+				"English": "Flue",
+				"Dansk": "Influenza"
+			},
+			"BD13": {
+				"English": "Hallucinate",
+				"Dansk": "Hallucinere"
+			},
+			"BD14": {
+				"English": "Hostile",
+				"Dansk": "Fjendtlig"
+			},
+			"BD15": {
+				"English": "Stubborn",
+				"Dansk": "St\u00e6dig"
+			},
+			"BD16": {
+				"English": "Invisible",
+				"Dansk": "Usyndlig"
+			},
+			"BD17": {
+				"English": "Malicious",
+				"Dansk": "Ondsindet"
+			},
+			"BD18": {
+				"English": "Memory loss",
+				"Dansk": "Hukommelsestab"
+			},
+			"BD19": {
+				"English": "Nose bleed",
+				"Dansk": "N\u00e6seblod"
+			},
+			"BD20": {
+				"English": "Panic attack",
+				"Dansk": "Panikanfald"
+			},
+			"BD21": {
+				"English": "Paralyzed",
+				"Dansk": "Lammet"
+			},
+			"BD22": {
+				"English": "Paranoid",
+				"Dansk": "Paranoid"
+			},
+			"BD23": {
+				"English": "Poisoned",
+				"Dansk": "Forgiftet"
+			},
+			"BD24": {
+				"English": "Psychopath",
+				"Dansk": "Psykopat "
+			},
+			"BD25": {
+				"English": "Schizophrenia",
+				"Dansk": "Skizofreni"
+			},
+			"BD26": {
+				"English": "Terrified",
+				"Dansk": "R\u00e6dselsslagen"
+			},
+			"BD27": {
+				"English": "The cold",
+				"Dansk": "Fork\u00f8let"
+			},
+			"BD28": {
+				"English": "Unconscious",
+				"Dansk": "Bevidstl\u00f8s"
+			},
+			"BD29": {
+				"English": "Vanished",
+				"Dansk": "Forsvundne"
+			},
+			"BD30": {
+				"English": "Wanted",
+				"Dansk": "Efterlyst"
+			},
+			"BD31": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BD32": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BD33": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BD34": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"BD35": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		}
+	},
+	"Fairytale": {
+		"Object": {
+			"FO01": {
+				"English": "A trap",
+				"Dansk": "F\u00e6lde"
+			},
+			"FO02": {
+				"English": "A well",
+				"Dansk": "Br\u00f8nd"
+			},
+			"FO03": {
+				"English": "Antitoxin potion",
+				"Dansk": "Antitoksin eliksir"
+			},
+			"FO04": {
+				"English": "Armor",
+				"Dansk": "Rustning"
+			},
+			"FO05": {
+				"English": "Axe",
+				"Dansk": "\u00D8kse"
+			},
+			"FO06": {
+				"English": "Backpack",
+				"Dansk": "Rygs\u00e6k"
+			},
+			"FO07": {
+				"English": "Birdcage",
+				"Dansk": "Fuglebur"
+			},
+			"FO08": {
+				"English": "Blanket",
+				"Dansk": "T\u00e6ppe"
+			},
+			"FO09": {
+				"English": "Boat",
+				"Dansk": "B\u00e5d"
+			},
+			"FO10": {
+				"English": "Book",
+				"Dansk": "Bog"
+			},
+			"FO11": {
+				"English": "Bow & arrows",
+				"Dansk": "Bue og pil"
+			},
+			"FO12": {
+				"English": "Box",
+				"Dansk": "Kasse"
+			},
+			"FO13": {
+				"English": "Chain",
+				"Dansk": "K\u00e6de"
+			},
+			"FO14": {
+				"English": "Compass",
+				"Dansk": "Kompas"
+			},
+			"FO15": {
+				"English": "Corpse",
+				"Dansk": "Lig"
+			},
+			"FO16": {
+				"English": "Crown",
+				"Dansk": "Krone"
+			},
+			"FO17": {
+				"English": "Crystal",
+				"Dansk": "Krystal"
+			},
+			"FO18": {
+				"English": "Cup",
+				"Dansk": "Kup"
+			},
+			"FO19": {
+				"English": "Dagger",
+				"Dansk": "Dolk"
+			},
+			"FO20": {
+				"English": "Door",
+				"Dansk": "D\u00f8r"
+			},
+			"FO21": {
+				"English": "Dress",
+				"Dansk": "Kjole"
+			},
+			"FO22": {
+				"English": "Flute",
+				"Dansk": "Fl\u00f8jte"
+			},
+			"FO23": {
+				"English": "Food",
+				"Dansk": "Mad"
+			},
+			"FO24": {
+				"English": "Gem",
+				"Dansk": "\u00e6delsten"
+			},
+			"FO25": {
+				"English": "Gift",
+				"Dansk": "Gave"
+			},
+			"FO26": {
+				"English": "Gloves",
+				"Dansk": "Handsker"
+			},
+			"FO27": {
+				"English": "Healing potion",
+				"Dansk": "Helbredende eliksir"
+			},
+			"FO28": {
+				"English": "Helmet",
+				"Dansk": "Hjelm"
+			},
+			"FO29": {
+				"English": "Hide",
+				"Dansk": "Skin"
+			},
+			"FO30": {
+				"English": "Key",
+				"Dansk": "N\u00f8gle"
+			},
+			"FO31": {
+				"English": "Key",
+				"Dansk": "N\u00f8gle"
+			},
+			"FO32": {
+				"English": "Lantern",
+				"Dansk": "Lanterne"
+			},
+			"FO33": {
+				"English": "Lock",
+				"Dansk": "L\u00e5s"
+			},
+			"FO34": {
+				"English": "Longsword",
+				"Dansk": "Sv\u00e6rd"
+			},
+			"FO35": {
+				"English": "Mask",
+				"Dansk": "Maske"
+			},
+			"FO36": {
+				"English": "Matches",
+				"Dansk": "T\u00e6ndstikker"
+			},
+			"FO37": {
+				"English": "Mirror",
+				"Dansk": "Spejl"
+			},
+			"FO38": {
+				"English": "Music box",
+				"Dansk": "Musik boks"
+			},
+			"FO39": {
+				"English": "Necklace",
+				"Dansk": "Halsk\u00e6de"
+			},
+			"FO40": {
+				"English": "Net",
+				"Dansk": "Net"
+			},
+			"FO41": {
+				"English": "Oil",
+				"Dansk": "Olie"
+			},
+			"FO42": {
+				"English": "Poison",
+				"Dansk": "Gift"
+			},
+			"FO43": {
+				"English": "Pot",
+				"Dansk": "Gryde"
+			},
+			"FO44": {
+				"English": "Potion",
+				"Dansk": "Eliksir"
+			},
+			"FO45": {
+				"English": "Ring",
+				"Dansk": "Ring"
+			},
+			"FO46": {
+				"English": "Robe",
+				"Dansk": "K\u00e5be"
+			},
+			"FO47": {
+				"English": "Rope",
+				"Dansk": "Reb"
+			},
+			"FO48": {
+				"English": "Scarf",
+				"Dansk": "Halst\u00f8rkl\u00e6de"
+			},
+			"FO49": {
+				"English": "Shield",
+				"Dansk": "Skjold"
+			},
+			"FO50": {
+				"English": "Ship",
+				"Dansk": "Skib"
+			},
+			"FO51": {
+				"English": "Silk robe",
+				"Dansk": "Silkek\u00e5be"
+			},
+			"FO52": {
+				"English": "Skull",
+				"Dansk": "Kranium"
+			},
+			"FO53": {
+				"English": "Sledgehammer",
+				"Dansk": "Mukkert"
+			},
+			"FO54": {
+				"English": "Spell book",
+				"Dansk": "Besv\u00e6rgelsesbog"
+			},
+			"FO55": {
+				"English": "Binoculars",
+				"Dansk": "Kikkert"
+			},
+			"FO56": {
+				"English": "Staff",
+				"Dansk": "Stav"
+			},
+			"FO57": {
+				"English": "Stairs",
+				"Dansk": "Trappe"
+			},
+			"FO58": {
+				"English": "Sword",
+				"Dansk": "Sv\u00e6rd"
+			},
+			"FO59": {
+				"English": "Tent",
+				"Dansk": "Telt"
+			},
+			"FO60": {
+				"English": "Tinderbox",
+				"Dansk": "Fyrt\u00f8jet"
+			},
+			"FO61": {
+				"English": "Torch",
+				"Dansk": "Fakkel"
+			},
+			"FO62": {
+				"English": "Treasure chest",
+				"Dansk": "Skattekiste"
+			},
+			"FO63": {
+				"English": "Tree",
+				"Dansk": "Tr\u00e6"
+			},
+			"FO64": {
+				"English": "Wagon",
+				"Dansk": "Vogn"
+			},
+			"FO65": {
+				"English": "Wall",
+				"Dansk": "V\u00e6g"
+			},
+			"FO66": {
+				"English": "Whip",
+				"Dansk": "Pisk"
+			},
+			"FO67": {
+				"English": "Window",
+				"Dansk": "Vindue"
+			},
+			"FO68": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FO69": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FO70": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FO71": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FO72": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		},
+		"Character": {
+			"FC01": {
+				"English": "Archer",
+				"Dansk": "Bueskytte"
+			},
+			"FC02": {
+				"English": "Beast",
+				"Dansk": "B\u00e6st"
+			},
+			"FC03": {
+				"English": "Beggar",
+				"Dansk": "Tigger"
+			},
+			"FC04": {
+				"English": "Bird",
+				"Dansk": "Fugl"
+			},
+			"FC05": {
+				"English": "Blacksmith",
+				"Dansk": "Smed"
+			},
+			"FC06": {
+				"English": "Boy",
+				"Dansk": "Dreng"
+			},
+			"FC07": {
+				"English": "Chicken",
+				"Dansk": "Kylling"
+			},
+			"FC08": {
+				"English": "Doctor",
+				"Dansk": "L\u00e6ge"
+			},
+			"FC09": {
+				"English": "Dragon",
+				"Dansk": "Drage"
+			},
+			"FC10": {
+				"English": "Dwarf",
+				"Dansk": "Dv\u00e6rg"
+			},
+			"FC11": {
+				"English": "Fairy",
+				"Dansk": "Fe"
+			},
+			"FC12": {
+				"English": "Father",
+				"Dansk": "Far"
+			},
+			"FC13": {
+				"English": "Fisherman",
+				"Dansk": "Fisker"
+			},
+			"FC14": {
+				"English": "Frog",
+				"Dansk": "Fr\u00f8"
+			},
+			"FC15": {
+				"English": "Giant",
+				"Dansk": "K\u00e6mpe"
+			},
+			"FC16": {
+				"English": "Girl",
+				"Dansk": "Pige"
+			},
+			"FC17": {
+				"English": "Guard",
+				"Dansk": "Vagt"
+			},
+			"FC18": {
+				"English": "Horse",
+				"Dansk": "Hest"
+			},
+			"FC19": {
+				"English": "Hunter",
+				"Dansk": "J\u00e6ger"
+			},
+			"FC20": {
+				"English": "Husband",
+				"Dansk": "Mand"
+			},
+			"FC21": {
+				"English": "King",
+				"Dansk": "Konge"
+			},
+			"FC22": {
+				"English": "Knight",
+				"Dansk": "Ridder"
+			},
+			"FC23": {
+				"English": "Lumberjack",
+				"Dansk": "Skovhugger"
+			},
+			"FC24": {
+				"English": "Merchant",
+				"Dansk": "K\u00f8bmand"
+			},
+			"FC25": {
+				"English": "Mermaid",
+				"Dansk": "Havfrue"
+			},
+			"FC26": {
+				"English": "Monster",
+				"Dansk": "Uhyre"
+			},
+			"FC27": {
+				"English": "Mother",
+				"Dansk": "Mor"
+			},
+			"FC28": {
+				"English": "Old person",
+				"Dansk": "Gammel person"
+			},
+			"FC29": {
+				"English": "Orphan",
+				"Dansk": "For\u00e6ldrel\u00f8s"
+			},
+			"FC30": {
+				"English": "Pig",
+				"Dansk": "Gris"
+			},
+			"FC31": {
+				"English": "Preist",
+				"Dansk": "Pr\u00e6st"
+			},
+			"FC32": {
+				"English": "Prince",
+				"Dansk": "Prins"
+			},
+			"FC33": {
+				"English": "Princess",
+				"Dansk": "Prinsesse"
+			},
+			"FC34": {
+				"English": "Prisoner",
+				"Dansk": "Fange"
+			},
+			"FC35": {
+				"English": "Queen",
+				"Dansk": "Dronning"
+			},
+			"FC36": {
+				"English": "Sibling",
+				"Dansk": "S\u00f8skende"
+			},
+			"FC37": {
+				"English": "Thief",
+				"Dansk": "Tyv"
+			},
+			"FC38": {
+				"English": "Unicorn",
+				"Dansk": "Enhj\u00f8rning"
+			},
+			"FC39": {
+				"English": "Warrior",
+				"Dansk": "Kriger"
+			},
+			"FC40": {
+				"English": "Wife",
+				"Dansk": "Kone"
+			},
+			"FC41": {
+				"English": "Witch",
+				"Dansk": "Heks"
+			},
+			"FC42": {
+				"English": "Wizard",
+				"Dansk": "Troldmand"
+			},
+			"FC43": {
+				"English": "Wolf",
+				"Dansk": "Ulv"
+			},
+			"FC44": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FC45": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FC46": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FC47": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FC48": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		},
+		"Location": {
+			"FL01": {
+				"English": "Abandoned town",
+				"Dansk": "Forladt by"
+			},
+			"FL02": {
+				"English": "Basement",
+				"Dansk": "K\u00e6lder"
+			},
+			"FL03": {
+				"English": "Blacksmith",
+				"Dansk": "Smed"
+			},
+			"FL04": {
+				"English": "Boat",
+				"Dansk": "B\u00e5d"
+			},
+			"FL05": {
+				"English": "Cave",
+				"Dansk": "Hule"
+			},
+			"FL06": {
+				"English": "Church",
+				"Dansk": "Kirke"
+			},
+			"FL07": {
+				"English": "City",
+				"Dansk": "By"
+			},
+			"FL08": {
+				"English": "Cliff",
+				"Dansk": "Klint"
+			},
+			"FL09": {
+				"English": "Dungeon",
+				"Dansk": "Fangehul"
+			},
+			"FL10": {
+				"English": "Forest",
+				"Dansk": "Skov"
+			},
+			"FL11": {
+				"English": "Garden",
+				"Dansk": "Have"
+			},
+			"FL12": {
+				"English": "Harbor",
+				"Dansk": "Havn"
+			},
+			"FL13": {
+				"English": "House",
+				"Dansk": "Hus"
+			},
+			"FL14": {
+				"English": "Island",
+				"Dansk": "\u00f8"
+			},
+			"FL15": {
+				"English": "Kingdom",
+				"Dansk": "Kongerige"
+			},
+			"FL16": {
+				"English": "Kitchen",
+				"Dansk": "K\u00f8kken"
+			},
+			"FL17": {
+				"English": "Lake",
+				"Dansk": "S\u00f8"
+			},
+			"FL18": {
+				"English": "Market",
+				"Dansk": "Marked"
+			},
+			"FL19": {
+				"English": "Mountain",
+				"Dansk": "Bjerg"
+			},
+			"FL20": {
+				"English": "Palace",
+				"Dansk": "Palads"
+			},
+			"FL21": {
+				"English": "Ritual table",
+				"Dansk": "Ritualbord"
+			},
+			"FL22": {
+				"English": "River",
+				"Dansk": "Flod"
+			},
+			"FL23": {
+				"English": "Road",
+				"Dansk": "Vej"
+			},
+			"FL24": {
+				"English": "Ruin",
+				"Dansk": "Ruin"
+			},
+			"FL25": {
+				"English": "Swamp",
+				"Dansk": "Sump"
+			},
+			"FL26": {
+				"English": "Tower",
+				"Dansk": "T\u00e5rn"
+			},
+			"FL27": {
+				"English": "Tresuare room",
+				"Dansk": "Skattekammer"
+			},
+			"FL28": {
+				"English": "Village",
+				"Dansk": "Landsby"
+			},
+			"FL29": {
+				"English": "Waterfall",
+				"Dansk": "Vandfald"
+			},
+			"FL30": {
+				"English": "Workshop",
+				"Dansk": "V\u00e6rksted"
+			},
+			"FL31": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FL32": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FL33": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FL34": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			},
+			"FL35": {
+				"English": "_____________",
+				"Dansk": "_____________"
+			}
+		}
+	}
+};
