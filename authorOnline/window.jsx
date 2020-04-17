@@ -92,8 +92,10 @@ window.onmouseup = function () {
 }
 
 window.onbeforeunload = function () {
-    if (document.getElementById("cardsInput").innerHTML.length > 0) {
-        sendActivity("close");
-        return 'Are you sure you want to leave?';
+    if (!devMode) {
+        if (document.getElementById("cardsInput").innerHTML.length > 0) {
+            sendActivity("close");
+            return 'Are you sure you want to leave?';
+        }
     }
 };

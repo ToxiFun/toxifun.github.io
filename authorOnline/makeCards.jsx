@@ -2,6 +2,9 @@
     var newCard = document.createElement("div");
 
     if (status == "origianlDeck") {
+        if (Object.keys(cards[expan][cat]).length <= 5) return alert("No more " + cat + " cards.");
+        if (cards[expan][cat][card][language] == "_____________")
+            return makeFront(Math.floor(Math.random() * cards[expan][cat].length), status, drawPos, expan, cat);
         newCard.element = cards[expan][cat][card][language];
         newCard.numberId = card;
         newCard.image = "../Pictures/" + cat + "/" + card + ".png";
@@ -9,10 +12,6 @@
         newCard.category = commands[cat][language];
         newCard.expansion = commands[expan][language];
         newCard.obj = cards[expan][cat][card];
-        if (Object.keys(cards[expan][cat]).length <= 5) return alert("No more " + cat + " cards.");
-        if (cards[expan][cat][card][language] == "_____________") {
-            return makeFront(Math.floor(Math.random() * cards[expan][cat].length), status, drawPos, expan, cat);
-        }
     } else if (status == "discardPile" || status == "load") {
         newCard.element = card.element;
         newCard.numberId = card.numberId;

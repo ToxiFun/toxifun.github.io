@@ -1,5 +1,4 @@
-﻿
-//  -   -   -   -   - Global Variables   -   -   -   -   -   //
+﻿//  -   -   -   -   - Global Variables   -   -   -   -   -   //
 var cards = JSON.parse(JSON.stringify(JSONcards));
 const categoryColor = JSONcategoryColor;
 const commands = JSONcommands;
@@ -7,6 +6,7 @@ var discardPile = [];
 var language = "English";
 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 var activity;
+var devMode = false;
 
 //  -   -   -   -   - Global Functions   -   -   -   -   -   //
 function removeOnMouseLeave(event, elem) {
@@ -71,7 +71,14 @@ function writeActivity(handle, obj1, location, obj2) {
 }
 
 function sendActivity(reason) {
-    writeActivity("End", "activityLog", "becuase", reason);
-    writeActivity("Send", "activityLog", "to", "dataBase");
-    ref.push(activity);
+    if (!devMode) {
+        writeActivity("End", "activityLog", "becuase", reason);
+        writeActivity("Send", "activityLog", "to", "dataBase");
+        if (ref) {
+            console.log("Databse: Success")
+            ref.push(activity);
+        } else {
+            console.log("Database: Error - 404");
+        }
+    }
 }
