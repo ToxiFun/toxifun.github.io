@@ -1,4 +1,5 @@
 function roleDice(first) {
+    letMark = false;
     var dice = document.getElementById("dice");
 
     if (dice.innerHTML == "") {
@@ -48,7 +49,6 @@ function roleDice(first) {
     for (var i = 0; i < diceVal[getDice].length; i++) {
         dots[diceVal[getDice][i]].style.display = "block";
     }
-
     if (Math.random() < 0.95 && !first) return setTimeout(function () { roleDice(); }, 100);
 
     if (!first) {
@@ -58,6 +58,7 @@ function roleDice(first) {
 }
 
 function openSettings(Event) {
+    letMark = false;
     interactCounting("settings");
     if (!document.getElementById("getSettings")) {
         var getSettings = document.createElement("div");
@@ -67,7 +68,8 @@ function openSettings(Event) {
         var newGame = document.createElement("div");
         newGame.append(document.createTextNode(commands["New_game"][language]));
         newGame.id = "New_game";
-        newGame.onclick = function () {
+        newGame.onmousedown = function () {
+            letMark = false;
             interactCounting(this.id);
             if (document.getElementById("cardsInput").innerHTML.length > 0) {
                 if (!confirm("Are you sure? All unsaved data will be lost.")) {
@@ -91,20 +93,22 @@ function openSettings(Event) {
         saveGame.append(document.createTextNode(commands["Save_game"][language]));
         saveGame.className = "setting";
         saveGame.id = "Save_game";
-        saveGame.onclick = function () {
+        saveGame.onmousedown = function () {
+            letMark = false;
             interactCounting(this.id);
             var eachPick = document.getElementsByClassName("pick");
             var pickHolder = [];
             for (var each in eachPick) {
                 if (typeof eachPick[each] == "object") {
                     var newPick = {};
-                    var eachPickPos = eachPick[each].getBoundingClientRect();
+                    var eachPickPos = eachPick[each].childNodes[0].getBoundingClientRect();
                     newPick.posX = eachPickPos.x;
                     newPick.posY = eachPickPos.y;
 
-                    var keys = Object.keys(eachPick[each]);
+                    var keys = Object.keys(eachPick[each].childNodes[0]);
                     for (var key in keys)
-                        newPick[keys[key]] = eachPick[each][keys[key]];
+                        newPick[keys[key]] = eachPick[each].childNodes[0][keys[key]];
+                    newPick.classList = eachPick[each].classList
 
                     pickHolder.push(newPick);
                 }
@@ -130,7 +134,8 @@ function openSettings(Event) {
         loadGame.append(document.createTextNode(commands["Load_game"][language]));
         loadGame.type = "file";
         loadGame.id = "Load_game";
-        loadGame.onclick = function () {
+        loadGame.onmousedown = function () {
+            letMark = false;
             interactCounting(this.id);
             if (document.getElementById("cardsInput").innerHTML.length > 0) {
                 var abort = confirm("Are you sure? All unsaved data will be lost.");
@@ -142,7 +147,7 @@ function openSettings(Event) {
             writeActivity("Load", "game");
             sendActivity("loadGame");
 
-            document.getElementById('loadFile').addEventListener('change', function selectedFileChanged() {
+            this.addEventListener('change', function selectedFileChanged() {
                 var reader = new FileReader();
                 reader.onload = function fileReadCompleted() {
                     document.getElementById("cardsInput").innerHTML = "";
@@ -152,7 +157,28 @@ function openSettings(Event) {
                     activity = readerResult.activitySave;
                     for (var each in readerResult.pickCardsSave) {
                         var thisCard = readerResult.pickCardsSave[each];
-                        makeFront(thisCard, "load", [thisCard.posY, thisCard.posX], thisCard.expansion, thisCard.category);
+
+                        var linkChild = false;
+                        for (var key in thisCard.classList) {
+                            if (thisCard.classList[key] == "linkChild") linkChild = true;
+                        }
+
+                        makeFront(
+                            thisCard,
+                            "load",
+                            [thisCard.posY, thisCard.posX],
+                            thisCard.expansion,
+                            thisCard.category,
+                            linkChild
+                        );
+                    }
+                    var allCards = document.getElementsByClassName("cardLink");
+                    for (var i = allCards.length - 1; 0 <= i; i--) {
+                        if (allCards[i].classList.contains("linkChild")) {
+                            allCards[i].style.top = "50px";
+                            allCards[i].style.left = "0px";
+                            allCards[i - 1].append(allCards[i]);
+                        }
                     }
                 };
                 reader.readAsText(this.files[0]);
@@ -163,7 +189,8 @@ function openSettings(Event) {
 
         var pickLanguage = document.createElement("div");
         pickLanguage.append(document.createTextNode(commands["Language"][language]));
-        pickLanguage.onclick = function () {
+        pickLanguage.onmousedown = function () {
+            letMark = false;
             interactCounting(this.id);
             if (document.getElementById("languages")) {
                 document.getElementById("languages").parentNode.removeChild(document.getElementById("languages"));
@@ -177,7 +204,8 @@ function openSettings(Event) {
                     newLang.className = "setting";
                     newLang.id = lang;
                     if (lang == language) newLang.classList.add("pickedLang");
-                    newLang.onclick = function () {
+                    newLang.onmousedown = function () {
+                        letMark = false;
                         interactCounting(this.id);
                         language = this.id;
 
@@ -234,6 +262,7 @@ function openSettings(Event) {
 }
 
 function getDiscard(event) {
+    letMark = false;
     if (!document.getElementById("getDiscardPile")) {
         var getDiscardPile = document.createElement("div");
         getDiscardPile.id = "getDiscardPile";

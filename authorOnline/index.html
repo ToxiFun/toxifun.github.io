@@ -29,11 +29,11 @@
     <table>
         <tr>
             <th rowspan="2"><div id="backInput"></div></th>
-            <th><div id="dice" onclick="roleDice()"></div></th>
-            <th><div id="settings" onclick="openSettings(event)">S</div></th>
+            <th><div id="dice" onmousedown="roleDice()"></div></th>
+            <th><div id="settings" onmousedown="openSettings(event)">S</div></th>
         </tr>
         <tr>
-            <td colspan="2"><div id="discard" onclick="getDiscard(event)"><p class="element" style="margin-top:40px"></p></div></td>
+            <td colspan="2"><div id="discard" onmousedown="getDiscard(event)"><p class="element" style="margin-top:40px"></p></div></td>
         </tr>
     </table>
     <div id="cardsInput"></div>

@@ -1,4 +1,6 @@
-﻿function makeFront(card, status, drawPos, expan, cat) {
+﻿function makeFront(card, status, drawPos, expan, cat, linkChild) {
+    var cardLink = document.createElement("div");
+    cardLink.classList.add("cardLink");
     var newCard = document.createElement("div");
 
     if (status == "origianlDeck") {
@@ -81,19 +83,36 @@
         if (cards[expan][cat][card][language] != "_____________") image.src = "../Pictures/" + cat + "/" + card + ".png";
     }
 
-    newCard.onmousedown = function (event) {
-        interactCounting(this.numberId);
+    var dragable = true;
+    cardLink.onmousedown = function (event) {
         if (this.id == "" && !document.getElementById("drag")) {
-            this.id = "drag";
-            pos3 = event.clientX;
-            pos4 = event.clientY;
-            writeActivity("Pick", newCard);
+            dragable = true;
+            if (document.getElementsByClassName("marking").length > 0) {
+                if (0 <= Array.prototype.indexOf.call(document.getElementsByClassName("marking")[0].children, this)) dragable = false;
+            }
+            if (dragable) {
+                interactCounting(this.childNodes[0].numberId);
+                this.id = "drag";
+                pos3 = event.clientX;
+                pos4 = event.clientY;
+                if (this.classList.contains("linkChild")) {
+                    var thisPos = this.getBoundingClientRect();
+                    this.style.top = thisPos.y + "px";
+                    this.style.left = thisPos.x + "px";
+                    this.classList.remove("linkChild");
+                }
+                document.getElementById("cardsInput").append(this);
+
+                writeActivity("Pick", newCard);
+            }
         }
     }
 
     newCard.className = "card";
     newCard.style.backgroundColor = "rgb(255, 255, 255)";
-    document.getElementById("cardsInput").append(newCard);
+    cardLink.append(newCard);
+    if (linkChild) cardLink.className = "linkChild";
+    document.getElementById("cardsInput").append(cardLink);
 
     if (status == "origianlDeck" || status == "discardPile") {
         if (status == "origianlDeck")
@@ -101,12 +120,13 @@
 
         pos3 = event.clientX;
         pos4 = event.clientY;
-        newCard.id = "drag";
+        cardLink.id = "drag";
     }
-    newCard.classList.add("pick");
-    newCard.style.position = "absolute";
-    newCard.style.top = drawPos[0];
-    newCard.style.left = drawPos[1];
+    cardLink.classList.add("pick");
+    cardLink.classList.add("cardLink");
+    cardLink.style.position = "absolute";
+    cardLink.style.top = drawPos[0];
+    cardLink.style.left = drawPos[1];
 
     writeActivity("Get", newCard, "from", status);
 }

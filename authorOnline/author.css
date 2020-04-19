@@ -10,6 +10,15 @@
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 }
 
+div, p {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
 .page {
     width: 19.6406cm;
     padding: 0px;
@@ -64,6 +73,9 @@
     background-color: lightblue;
 }
 
+#cardsInput {
+}
+
 .card, .backCard {
     display: block;
     float: left;
@@ -84,7 +96,7 @@
     height: 265px;
     float: left;
     margin-left: -210px;
-    z-index: -5;
+    z-index: -100;
 }
 
 .color {
@@ -240,4 +252,18 @@
 
 .discardedCard:hover, .setting:hover {
     background-color: lightgrey;
+}
+
+#mark {
+    position: absolute;
+    z-index: 100;
+    background-color: lightblue;
+    border: 1px solid lightblue;
+    opacity: 0.5;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

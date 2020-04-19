@@ -6,7 +6,8 @@ var discardPile = [];
 var language = "English";
 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 var activity;
-var devMode = false;
+var devMode = true;
+var letMark = true;
 
 //  -   -   -   -   - Global Functions   -   -   -   -   -   //
 function removeOnMouseLeave(event, elem) {
@@ -20,22 +21,7 @@ function removeOnMouseLeave(event, elem) {
 }
 
 function newActivity() {
-
-    /*
-    //Make activity id number
-    var actIdLength = 10;
-    var noGoId = [58, 59, 60, 61, 62, 63, 64, 91, 92, 93, 94, 95, 96];
-    var actId = "";
-    while (actId.length < actIdLength) {
-        var randChar = noGoId[0];
-        while (0 <= noGoId.indexOf(randChar)) {
-            randChar = Math.floor(Math.random() * (122 - 48)) + 48;
-        } actId += String.fromCharCode(randChar);
-    }
-    */
-
     activity = {
-        //"actId": actId,
         "interactCount": {},
         "activityLog": []
     }
@@ -81,4 +67,47 @@ function sendActivity(reason) {
             console.log("Database: Error - 404");
         }
     }
+}
+
+function checkOverLap(obj1, obj2) {
+    var obj1Pos = obj1.getBoundingClientRect();
+    var obj2Pos = obj2.getBoundingClientRect();
+    if (obj1Pos.y < obj2Pos.y + obj2Pos.height && obj1Pos.y + obj1Pos.height > obj2Pos.y) {
+        if (obj1Pos.x < obj2Pos.x + obj2Pos.width && obj1Pos.x + obj1Pos.width > obj2Pos.x) {
+            return true;
+        }
+    }
+}
+
+function getLinkChild(drag, action, list) {
+    var dragChildren = drag.childNodes;
+    for (var child in dragChildren) {
+        if (dragChildren[child].className) {
+            if (dragChildren[child].classList.contains("card")) {
+                if (action == "makeList") list.push(dragChildren[child].numberId);
+                else if (action == "putBack") {
+                    cards[dragChildren[child].expansion][dragChildren[child].category][dragChildren[child].numberId] = dragChildren[child].obj;
+                    writeActivity("Move", dragChildren[child], "to", "originalDeck");
+                } else if (action == "putDiscard") {
+                    discardPile.push(dragChildren[child]);
+                    writeActivity("Move", dragChildren[child], "to", "discardPile");
+                } else if (action == "hover") {
+                    dragChildren[child].style.backgroundColor = "pink";
+                }
+            }
+            if (dragChildren[child].classList.contains("cardLink")) {
+                getLinkChild(dragChildren[child], action, list);
+            }
+        }
+    }
+    if (action == "makeList") return list;
+    else if (action == "putBack" || action == "putDiscard") drag.parentNode.removeChild(drag)
+}
+
+function appendToLastChild(parent, child) {
+    if (parent.childElementCount <= 1) {
+        child.classList.add("linkChild")
+        child.style.top = "50px";
+        parent.append(child);
+    } else appendToLastChild(parent.childNodes[1], child)
 }
