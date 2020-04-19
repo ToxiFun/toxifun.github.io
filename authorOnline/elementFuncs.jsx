@@ -122,7 +122,7 @@ function openSettings(Event) {
             var contLayout = `<html><head><script>
 function open() {
     const a = document.createElement("a");
-    a.href = "file:///C:/xampp/htdocs/index.html";
+    a.href = "http://tonkobossen.dk/authorOnline/";
     a.click();
 };`
             contLayout += 'var savedData = ' + JSON.stringify(saveCont);
