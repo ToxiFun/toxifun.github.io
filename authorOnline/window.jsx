@@ -10,6 +10,7 @@
         mark.style.top = mark.posY;
 
         document.body.append(mark);
+        writeActivity("Make", "marking");
     }
 
     //Remove marking
@@ -35,6 +36,7 @@
             var allCards = document.getElementsByClassName("cardLink");
             for (var i = allCards.length - 1; 0 <= i; i--) {
                 allCards[i].childNodes[0].style.border = "1px solid grey";
+                allCards[i].childNodes[0].style.backgroundColor = "rgb(255, 255, 255)";
                 if (allCards[i].classList.contains("linkChild")) {
                     allCards[i].style.top = "50px";
                     allCards[i].style.left = "0px";
@@ -43,6 +45,7 @@
             }
 
             document.getElementsByClassName("marking")[0].remove();
+            writeActivity("Remove", "marking");
         }
     }
 }
@@ -141,7 +144,12 @@ window.onmouseup = function () {
 
         //Get marked elements
         var allCards = document.getElementsByClassName("cardLink");
-        for (var i = 0; i < allCards.length; i++) if (checkOverLap(mark, allCards[i])) allCards[i].classList.add("marked");
+        for (var i = 0; i < allCards.length; i++) {
+            if (checkOverLap(mark, allCards[i])) {
+                writeActivity("Add", allCards[i].childNodes[0], "to", "marking");
+                allCards[i].classList.add("marked");
+            }
+        }
 
         //Update marking
         if (0 < document.getElementsByClassName("marked").length) {
@@ -223,7 +231,6 @@ window.onmouseup = function () {
                                 drag.style.top = "0px";
                                 drag.style.left = "0px";
                                 appendToLastChild(allCards[i], drag);
-
                                 writeActivity("Snap", dragChild, "to", allCards[i]);
                             }
                         }
