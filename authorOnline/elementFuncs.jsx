@@ -106,8 +106,7 @@ function openSettings(Event) {
                     newPick.posY = eachPickPos.y;
 
                     var keys = Object.keys(eachPick[each].childNodes[0]);
-                    for (var key in keys)
-                        newPick[keys[key]] = eachPick[each].childNodes[0][keys[key]];
+                    for (var key in keys) newPick[keys[key]] = eachPick[each].childNodes[0][keys[key]];
                     newPick.classList = eachPick[each].classList
 
                     pickHolder.push(newPick);
@@ -120,10 +119,21 @@ function openSettings(Event) {
                 "activitySave": activity
             };
 
+            var contLayout = `<html><head><script>
+function open() {
+    const a = document.createElement("a");
+    a.href = "file:///C:/xampp/htdocs/index.html";
+    a.click();
+};`
+            contLayout += 'var savedData = ' + JSON.stringify(saveCont);
+            contLayout += '\n</script></head><body onload="open()"></body></html>';
+
             const a = document.createElement("a");
-            const file = new Blob([JSON.stringify(saveCont)], { type: "text/plain" });
+            const file = new Blob([contLayout], { type: "text/plain" });
             a.href = URL.createObjectURL(file);
-            a.download = "saveTest";
+            var saveName = String(prompt("Save game as:"))
+            if (saveName.length <= 0) saveName = "Author Online";
+            a.download = saveName + ".html";
             a.click();
             writeActivity("Save", "game");
         }
@@ -151,7 +161,9 @@ function openSettings(Event) {
                 var reader = new FileReader();
                 reader.onload = function fileReadCompleted() {
                     document.getElementById("cardsInput").innerHTML = "";
-                    var readerResult = JSON.parse(reader.result);
+                    var start = reader.result.search("savedData") + 12;
+                    var end = reader.result.search("</script>");
+                    var readerResult = JSON.parse(reader.result.substring(start, end));
                     cards = readerResult.cardsSave;
                     discardPile = readerResult.discardPileSave;
                     activity = readerResult.activitySave;

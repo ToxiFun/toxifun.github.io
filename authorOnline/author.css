@@ -267,3 +267,10 @@ div, p {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.marking {
+    border: 1px solid rgba(144, 202, 249, 1.0);
+    border-radius: 15px;
+    position: absolute;
+    z-index: 100;
+}
