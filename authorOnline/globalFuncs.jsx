@@ -6,7 +6,7 @@ var discardPile = [];
 var language = "English";
 var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 var activity;
-var devMode = true;
+var devMode = false;
 var letMark = true;
 
 //  -   -   -   -   - Global Functions   -   -   -   -   -   //
