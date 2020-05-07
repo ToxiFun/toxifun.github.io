@@ -224,6 +224,7 @@
 		if (ref) {
             ref.push(newSkill);
             console.log("Database: Success");
+			window.location.reload();
         } else {
             console.log("Database: Error - 404");
         }
@@ -291,7 +292,7 @@
 			<input type="radio" id="other" name="skillPlatform" value="other">
 			<label for="other">Other</label><br>
 		
-		<input type="button" value="New skill" onclick="addSkills()">
+		<input type="button" value="Add skill" onclick="addSkills()">
 	</form>
 </div>
 </center>
