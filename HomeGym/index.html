@@ -65,9 +65,11 @@
 					userSkill.append(userSkillLabel);
 					userSkill.append(document.createElement("br"));
 					
-					firebase.database().ref('users/' + uid + "/" + keysSorted[each]).once('value').then(function(snapshot) {
+					firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
 						var getSkillLevel = snapshot.val();
-						if (getSkillLevel != "") document.getElementById("skillLevelRadio_" + keysSorted[each] + "_" + getSkillLevel).checked = true;
+						for (var every in getSkillLevel) {
+							if (getSkillLevel[every] > 0) document.getElementById("skillLevelRadio_" + every + "_" + getSkillLevel[every]).checked = true;
+						}
 					});	
 						
 					for (var i = 1; i <= 3; i++) {
@@ -101,18 +103,14 @@
 	firebase.database().ref("tumblingSkills").once('value').then(function(snapshot) {
 		var key = snapshot.val();
 		for (var each in key) {
+		console.log(each)
 			console.log(document.forms["skillLevel" + each]["userSkill"].value)
 			firebase.database().ref('users/' + uid + "/" + each).set(
 					document.forms["skillLevel" + each]["userSkill"].value
 				);
 			}
 		});
-		
-					console.log(uid)
-		firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
-			var key = snapshot.val();
-			console.log(key);
-		});
+		alert("Skill level saved");
 	}
 	
 	
