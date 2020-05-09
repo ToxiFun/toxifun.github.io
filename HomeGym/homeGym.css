@@ -2,15 +2,27 @@
 	border: 1px solid black;
 	padding: 10px;
 	margin: 10px;
-	width: 150px;
+	width: 200px;
 	display: inline-block;
 	text-align: left;
 }
 
 #skillForm {
 	border: 1px solid black;
-	padding: 5px;
+	padding: 10px;
 	margin: 10px;
-	width: 150px;
+	width: 200px;
 	text-align: left;
+}
+
+.userSkill {
+	padding: 5px;
+}
+
+.userSkillLevel {
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	margin: 5px;
+	border: 1px solid black;
 }

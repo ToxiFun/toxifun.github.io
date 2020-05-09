@@ -1,3 +1,7 @@
+
+//Gloabl variables
+var name, email, photoUrl, uid, emailVerified;
+
 var config = {
 apiKey: "AIzaSyDITJm2Uiye8VSFturMBOWxY5v85S5F4Zc",
 authDomain: "homegym-19546.firebaseapp.com",
@@ -15,3 +19,14 @@ var database = firebase.database();
 if (database) console.log("Database load success");
 else console.log("Database load fail");
 var ref = database.ref("tumblingSkills");
+
+function logout() {
+	firebase.auth().signOut().then(function() {
+		// Sign-out successful.
+		console.log("Log out complete.");
+		window.location.reload();
+	}).catch(function(error) {
+		// An error happened.
+		console.log("Log out error.");
+	});
+}

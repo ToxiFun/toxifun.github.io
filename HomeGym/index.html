@@ -6,6 +6,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
     <script rel="javaScript" type="text/javascript" src="firebase.js"></script>
+    <script rel="javaScript" type="text/javascript" src="startUp.js"></script>
+    <script rel="javaScript" type="text/javascript" src="skillHandle.js"></script>
     <link rel="stylesheet" type="text/css" href="homeGym.css">
 	
 	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -17,227 +19,6 @@
 		return input.charAt(0).toUpperCase() + input.slice(1); 
 	}
 	
-	//Gloabl variables
-	var name, email, photoUrl, uid, emailVerified;
-	
-	function loadSkills() {
-	
-		firebase.database().ref("tumblingSkills").once('value').then(function(snapshot) {
-			var key = snapshot.val();
-			var skills = document.getElementById("skills");
-
-			if (key) {
-			
-				//Sort according to platform
-				keysSorted = Object.keys(key).sort(function(a,b){
-					if(key[a]["platform"] < key[b]["platform"]) { return -1; }
-					if(key[a]["platform"] > key[b]["platform"]) { return 1; }
-					return 0;
-				});
-				
-				//Get each skill
-				skills.innerHTML = "";
-				for (var each in keysSorted) {
-					var newSkill = document.createElement("div");
-					newSkill.classList.add("skill");
-					
-					//Write element label
-					var newElem = document.createElement("p");
-					newElem.innerHTML = cap("name") + ": " + key[keysSorted[each]]["name"];
-					newSkill.append(newElem);
-					
-					//Get each skill element
-					for (var elem in key[keysSorted[each]]) {
-						if (elem != "contribute" && elem != "name") {
-							var newElem = document.createElement("p");
-							newElem.innerHTML = cap(elem) + ": " + key[keysSorted[each]][elem];
-							newSkill.append(newElem);
-						}
-					}
-					
-					//User skill level
-					var userSkill = document.createElement("form");
-					userSkill.classList.add("userSkill");
-					userSkill.name = "skillLevel" + keysSorted[each];
-					var userSkillLabel = document.createElement("label");
-					userSkillLabel.for = "skillLevel";
-					userSkillLabel.innerHTML = "Skill level: ";
-					userSkill.append(userSkillLabel);
-					userSkill.append(document.createElement("br"));
-					
-					firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
-						var getSkillLevel = snapshot.val();
-						for (var every in getSkillLevel) {
-							if (getSkillLevel[every] > 0) document.getElementById("skillLevelRadio_" + every + "_" + getSkillLevel[every]).checked = true;
-						}
-					});	
-						
-					for (var i = 1; i <= 3; i++) {
-						//Make label
-						var userSkillLabel = document.createElement("label");
-						userSkillLabel.for = i;
-						userSkillLabel.innerHTML = i;
-						userSkill.append(userSkillLabel);
-						
-						//Make radio
-						var userSkillLevel = document.createElement("input");
-						userSkillLevel.type = "radio";
-						userSkillLevel.value = i;
-						userSkillLevel.name = "userSkill";
-						userSkillLevel.id = "skillLevelRadio_" + keysSorted[each] + "_" + i;
-						
-						userSkill.append(userSkillLevel);
-					}
-					newSkill.append(userSkill);
-					
-					//Append to output
-					skills.append(newSkill);
-				}
-			} else {
-				skills.innerHTML = "No skills found."
-			}
-		});
-	}
-	
-	function saveSkills() {
-	firebase.database().ref("tumblingSkills").once('value').then(function(snapshot) {
-		var key = snapshot.val();
-		for (var each in key) {
-		console.log(each)
-			console.log(document.forms["skillLevel" + each]["userSkill"].value)
-			firebase.database().ref('users/' + uid + "/" + each).set(
-					document.forms["skillLevel" + each]["userSkill"].value
-				);
-			}
-		});
-		alert("Skill level saved");
-	}
-	
-	
-	function startUp() {
-	
-	firebase.auth().onAuthStateChanged(function(user) {
-			//LOGGED IN
-			if (user) {
-				console.log("User signed in.");
-				document.getElementById('firebaseui-auth-container').style.display = 'none';
-				document.getElementById('loggedIn').style.display = 'block';
-				document.getElementById('loginLoader').style.display = 'none';
-				
-				var user = firebase.auth().currentUser
-
-				if (user != null) {
-				  name = user.displayName;
-				  email = user.email;
-				  photoUrl = user.photoURL;
-				  emailVerified = user.emailVerified;
-				  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-								   // this value to authenticate with your backend server, if
-								   // you have one. Use User.getToken() instead.
-				}
-				document.getElementById("userNameTitle").innerHTML = "Welcome " + name + "!";
-				
-			//NOT LOGGED IN
-			} else {
-				document.getElementById('loggedIn').style.display = 'none';
-				console.log("No user signed in.");
-				
-				var ui = new firebaseui.auth.AuthUI(firebase.auth());
-	
-				ui.start('#firebaseui-auth-container', {
-				  signInOptions: [
-					{
-					  provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-					  signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
-					}
-				  ],
-				  // Other config options...
-				});
-				
-				var uiConfig = {
-					  callbacks: {
-						signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-						  // User successfully signed in.
-						  // Return type determines whether we continue the redirect automatically
-						  // or whether we leave that to developer to handle.
-						  //return true;
-						},
-						uiShown: function() {
-						  // The widget is rendered.
-						  // Hide the loginLoader.
-						  document.getElementById('loginLoader').style.display = 'none';
-						}
-					  },
-					  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-					  signInFlow: 'popup',
-					  signInSuccessUrl: '<url-to-redirect-to-on-success>',
-					  signInOptions: [
-						// Leave the lines as is for the providers you want to offer your users.
-						firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-						firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-						//firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-						//firebase.auth.GithubAuthProvider.PROVIDER_ID,
-						firebase.auth.EmailAuthProvider.PROVIDER_ID,
-						//firebase.auth.PhoneAuthProvider.PROVIDER_ID
-					  ],
-					  // Terms of service url.
-					  tosUrl: '<your-tos-url>',
-					  // Privacy policy url.
-					  privacyPolicyUrl: '<your-privacy-policy-url>'
-					};
-
-				ui.start('#firebaseui-auth-container', uiConfig);
-			}
-		loadSkills()
-		});
-	
-		}
-		
-	function addSkills() {
-	
-		var skillName = document.forms["skillForm"]["skillName"].value;
-		var skillPosition = document.forms["skillForm"]["skillPosition"].value;
-		var skillRotations = document.forms["skillForm"]["skillRotations"].value;
-		var skillTwists = document.forms["skillForm"]["skillTwists"].value;
-		var skillDiff = document.forms["skillForm"]["skillDiff"].value;
-		var skillPlatform = document.forms["skillForm"]["skillPlatform"].value;
-		if (skillName == "" || skillPosition == "" || skillRotations == "" || skillTwists == "" || skillDiff == "" || skillPlatform == "") {
-			alert("Must be filled out");
-			return;
-		}
-	
-		var newSkill = {
-			"name": skillName,
-			"position": skillPosition,
-			"rotations": skillRotations,
-			"twists": skillTwists,
-			"diff": skillDiff,
-			"platform": skillPlatform,
-			"contribute": {
-				"email": email,
-				"uid": uid
-			}
-		}
-	
-		if (ref) {
-            ref.push(newSkill);
-            console.log("Database: Success");
-			window.location.reload();
-        } else {
-            console.log("Database: Error - 404");
-        }
-	}
-	
-	function logout() {
-		firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-			console.log("Log out complete.");
-			window.location.reload();
-		}).catch(function(error) {
-			// An error happened.
-			console.log("Log out error.");
-		});
-	}
 	</script>
 </head>
 <body onload="startUp()">
@@ -245,13 +26,13 @@
 <h1>HomeGym</h1>
 <center>
 <div id="firebaseui-auth-container"></div>
-<div id="loginLoader">Loading...</div>
+<p id="loginLoader">Loading data...</p>
 
 <div id="loggedIn">
 	<h1 id="userNameTitle"></h1>
 	<input type="button" value="Sign-out" onclick="logout()" id="logoutBut">
 	
-	<div id="skills">Loading skills...</div>
+	<p id="skills">Loading skills...</p>
 	<input type="button" value="Save skills" onclick="saveSkills()" id="saveSkills">
 	
 	<h1 id="newSkillTitle">New Skills</h1>
