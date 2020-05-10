@@ -84,7 +84,7 @@ function refreshHTML() {
 	
 	var inputs = document.getElementsByTagName('INPUT');
 	for (var i = 0; i < inputs.length; i++) {
-		if (inputs[i].type == "button" && inputs[i].classList != "pickLang") inputs[i].value = cap(JSONcommands[inputs[i].id][language]);
+		if (inputs[i].type == "button" && inputs[i].classList != "pickLang" && inputs[i].value != "") inputs[i].value = cap(JSONcommands[inputs[i].id][language]);
 	}
 	
 	var H1s = document.getElementsByTagName('H1');

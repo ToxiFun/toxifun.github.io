@@ -19,21 +19,201 @@ function loadSkills() {
 				var newSkill = document.createElement("div");
 				newSkill.classList.add("skill");
 				
-				//Write element label
-				var newElem = document.createElement("p");
-				newElem.innerHTML = cap(JSONcommands["name"][language]) + ": ";
-				if (key[keysSorted[each]]["name"][language] == undefined) newElem.innerHTML += cap(JSONcommands["missingName"][language]);
-				else newElem.innerHTML += key[keysSorted[each]]["name"][language];
-				newSkill.append(newElem);
+				//Write element name - holder
+				var nameHolder = document.createElement("p");
+				
+					//Make element title
+					var newElem = document.createElement("span");
+					newElem.innerHTML = cap(JSONcommands["name"][language]) + ": ";
+					nameHolder.append(newElem);
+				
+					//Make element name
+					var newElemName = document.createElement("span");
+					newElemName.classList.add("changable");
+					if (key[keysSorted[each]]["name"][language] == undefined) {
+						newElemName.innerHTML = cap(JSONcommands["missingName"][language]);
+					} else newElemName.innerHTML = key[keysSorted[each]]["name"][language];
+					nameHolder.append(newElemName);
+					
+					//Make edit button
+					var contElem = document.createElement("input");
+					contElem.type = "button"
+					contElem.classList.add("contElem");
+					contElem.skillId = keysSorted[each];
+					if (key[keysSorted[each]]["name"][language] == undefined) contElem.noName = true;
+					contElem.onclick = function(event) {
+						if (document.getElementById("suggest")) {
+						} else {
+							//Make tab
+							var suggest = document.createElement("div");
+							suggest.id = "suggest";
+							var scrollLeft = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+							var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+							suggest.style.left = event.clientX + scrollLeft;
+							suggest.style.top = event.clientY + scrollTop;
+							
+							//Make edit but
+							var sugInput = document.createElement("input");
+							sugInput.type = "button";
+							sugInput.classList.add("suggest");
+							sugInput.classList.add("sugInput");
+							sugInput.skillId = this.skillId;
+							sugInput.noName = this.noName;
+							sugInput.id = "sugAnotherName";
+							sugInput.value = JSONcommands["sugAnotherName"][language];
+							sugInput.onclick = function() {
+								var otherNames = prompt(JSONcommands["nameMessage"][language]);
+								if (otherNames != "" && isNaN(otherNames)) {
+									if (this.noName) {
+										var holder = {};
+										holder[language] = otherNames;
+										firebase.database().ref("tumblingSkills/" + this.skillId + "/name/" + language).set(
+											otherNames
+										);
+										var suggest = document.getElementById("suggest");
+										suggest.parentNode.removeChild(suggest);
+									} else {
+										firebase.database().ref("tumblingSkills/" + this.skillId + "/otherNames/" + language).push(
+											otherNames
+										);
+									}
+									var conRapport = {}
+									conRapport["email"] = email;
+									conRapport["uid"] = uid;
+									conRapport["conribution"] = otherNames + " suggestion";
+									firebase.database().ref("tumblingSkills/" + this.skillId + "/contribute").push(
+										conRapport
+									);
+									console.log("Send");
+									startUp();
+								} else if (otherNames != null) {
+									alert(JSONcommands["inputError"][language]);
+								}
+							}
+							suggest.append(sugInput);
+							
+							//Make reportage but
+							var repInput = document.createElement("input");
+							repInput.type = "button";
+							repInput.classList.add("suggest");
+							repInput.classList.add("repInput");
+							repInput.skillId = this.skillId;
+							repInput.id = "report";
+							repInput.value = JSONcommands["report"][language];
+							repInput.onclick = function() {
+								var reportage = prompt(JSONcommands["reportMessage"][language]);
+								console.log(reportage)
+								if (reportage != null) {
+									var conRapport = {}
+									conRapport["email"] = email;
+									conRapport["uid"] = uid;
+									conRapport["conribution"] = "report";
+									conRapport["report"] = reportage;
+									firebase.database().ref("tumblingSkills/" + this.skillId + "/reportages").push(
+										reportage
+									);
+									console.log("Send");
+									var suggest = document.getElementById("suggest");
+									suggest.parentNode.removeChild(suggest);
+									startUp();
+								}
+							}
+							suggest.append(repInput);
+							
+							this.parentElement.append(suggest);
+							//sugInput.focus();
+						}
+					}
+					nameHolder.append(contElem);
+					
+				newSkill.append(nameHolder);
 				
 				//Get each skill element
 				for (var elem in key[keysSorted[each]]) {
-					if (elem != "contribute" && elem != "name") {
-						var newElem = document.createElement("p");
+					if (elem != "contribute" && elem != "name" && elem != "otherNames" && elem != "reportages") {
+						//Write element name
+						var nameHolder = document.createElement("p");
+						
+						//Make element title
+						var newElem = document.createElement("span");
 						newElem.innerHTML = cap(JSONcommands[elem][language]) + ": "
-						if (isNaN(key[keysSorted[each]][elem])) newElem.innerHTML += cap(JSONcommands[key[keysSorted[each]][elem]][language]);
-						else newElem.innerHTML += cap(key[keysSorted[each]][elem]);
-						newSkill.append(newElem);
+						nameHolder.append(newElem);
+						
+						//Make element content
+						var newElemName = document.createElement("span");
+						newElemName.classList.add("changable");
+						//Get average difficulty
+						if (elem == "diff" || elem == "difficulty") {
+							var calAvg = 0;
+							var count = 0;
+							for (var diff in key[keysSorted[each]][elem]) {
+								calAvg += parseInt(key[keysSorted[each]][elem][diff]);
+								count++;
+							}
+							newElemName.innerHTML += calAvg / count;
+						} else {
+							if (isNaN(key[keysSorted[each]][elem])) newElemName.innerHTML += cap(JSONcommands[key[keysSorted[each]][elem]][language]);
+							else newElemName.innerHTML += key[keysSorted[each]][elem];
+						}
+						nameHolder.append(newElemName);
+						
+						if (elem == "diff" || elem == "difficulty") {
+							//Make edit button
+							var contElem = document.createElement("input");
+							contElem.type = "button"
+							contElem.classList.add("contElem");
+							contElem.skillId = keysSorted[each];
+							contElem.elem = elem;
+							contElem.onclick = function(event) {
+								if (document.getElementById("suggest")) {
+								} else {
+									//Make tab
+									var suggest = document.createElement("div");
+									suggest.id = "suggest";
+									var scrollLeft = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+									var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+									suggest.style.left = event.clientX + scrollLeft;
+									suggest.style.top = event.clientY + scrollTop;
+									
+									//Make edit but
+									var sugInput = document.createElement("input");
+									sugInput.type = "button";
+									sugInput.classList.add("suggest");
+									sugInput.classList.add("sugInput");
+									sugInput.skillId = this.skillId;
+									sugInput.elem = this.elem;
+									sugInput.id = "sugAnotherName";
+									sugInput.value = JSONcommands["sugAnotherName"][language];
+									sugInput.onclick = function() {
+										var otherNames = prompt(JSONcommands["nameMessage"][language]);
+										if (otherNames != "" && !isNaN(otherNames)) {
+											firebase.database().ref("tumblingSkills/" + this.skillId + "/" + sugInput.elem).push(
+												otherNames
+											);
+											var conRapport = {}
+											conRapport["email"] = email;
+											conRapport["uid"] = uid;
+											conRapport["conribution"] = sugInput.elem + " suggestion";
+											firebase.database().ref("tumblingSkills/" + this.skillId + "/contribute").push(
+												conRapport
+											);
+											console.log("Send");
+											var suggest = document.getElementById("suggest");
+											suggest.parentNode.removeChild(suggest);
+											startUp();
+										} else if (otherNames != null) {
+											alert(JSONcommands["inputError"][language]);
+										}
+									}
+									suggest.append(sugInput);
+									
+									this.parentElement.append(suggest);
+									//sugInput.focus();
+								}
+							}
+							nameHolder.append(contElem);
+						}
+						newSkill.append(nameHolder);
 					}
 				}
 				
@@ -56,15 +236,15 @@ function loadSkills() {
 				firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
 					var getSkillLevel = snapshot.val();
 					for (var every in getSkillLevel) {
-						var curSkilLevel = document.getElementById("skillLevel" + every);
+						var curSkillLevel = document.getElementById("skillLevel" + every);
 						if (getSkillLevel[every] == 0) {
-							curSkilLevel.style.backgroundColor = "grey";
+							curSkillLevel.style.backgroundColor = "grey";
 						} else if (getSkillLevel[every] == 1) {
-							curSkilLevel.style.backgroundColor = "red";
+							curSkillLevel.style.backgroundColor = "red";
 						} else if (getSkillLevel[every] == 2) {
-							curSkilLevel.style.backgroundColor = "yellow";
+							curSkillLevel.style.backgroundColor = "yellow";
 						} else if (getSkillLevel[every] == 3) {
-							curSkilLevel.style.backgroundColor = "green";
+							curSkillLevel.style.backgroundColor = "green";
 						}
 					}
 				});	
@@ -106,6 +286,13 @@ function loadSkills() {
 				
 				newSkill.append(userSkill);
 				
+				/*
+				var elemLink = document.createElement("a");
+				elemLink.innerHTML = JSONcommands["readMore"][language];
+				elemLink.href = "element.html";
+				newSkill.append(elemLink);
+				*/
+				
 				//Append to output
 				skills.append(newSkill);
 			}
@@ -143,11 +330,13 @@ function addSkills() {
 		"position": skillPosition,
 		"rotations": skillRotations,
 		"twists": skillTwists,
-		"diff": skillDiff,
+		"diff": [skillDiff],
 		"platform": skillPlatform,
 		"contribute": {
-			"email": email,
-			"uid": uid
+			"creater": {
+				"email": email,
+				"uid": uid
+			}
 		}
 	}
 	newSkill["name"][language] = skillName;
