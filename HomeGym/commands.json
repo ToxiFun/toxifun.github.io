@@ -1,0 +1,88 @@
+var JSONcommands = {
+	"HomeGym": {
+		"English": "HomeGym",
+		"Dansk": "HomeGym"
+	}, "language": {
+		"English": "language",
+		"Dansk": "sprog"
+	}, "name": {
+		"English": "name",
+		"Dansk": "navn"
+	}, "missingName": {
+		"English": "add name to skill",
+		"Dansk": "tilf\u00f8j navn til element"
+	}, "difficulty": {
+		"English": "difficulty",
+		"Dansk": "Sv\u00e6rhedsgrad"
+	}, "diff": {
+		"English": "difficulty",
+		"Dansk": "Sv\u00e6rhedsgrad"
+	}, "skillDiff": {
+		"English": "difficulty",
+		"Dansk": "Sv\u00e6rhedsgrad"
+	}, "platform": {
+		"English": "platform",
+		"Dansk": "platform"
+	}, "floor": {
+		"English": "floor",
+		"Dansk": "gulv"
+	}, "trampet": {
+		"English": "trampet",
+		"Dansk": "trampet"
+	}, "backwards": {
+		"English": "backwards",
+		"Dansk": "bagl\u00e6ns"
+	}, "forward": {
+		"English": "forward",
+		"Dansk": "forl\u00e6ns"
+	}, "other": {
+		"English": "other",
+		"Dansk": "andre"
+	}, "position": {
+		"English": "position",
+		"Dansk": "position"
+	}, "tuck": {
+		"English": "tuck",
+		"Dansk": "lukket"
+	}, "pike": {
+		"English": "pike",
+		"Dansk": "hofte"
+	}, "layout": {
+		"English": "layout",
+		"Dansk": "strakt"
+	}, "puck": {
+		"English": "puck",
+		"Dansk": "puck"
+	}, "skillRotations": {
+		"English": "rotations",
+		"Dansk": "rotationer"
+	}, "skillTwists": {
+		"English": "twists",
+		"Dansk": "skruer"
+	}, "rotations": {
+		"English": "rotations",
+		"Dansk": "rotationer"
+	}, "twists": {
+		"English": "twists",
+		"Dansk": "skruer"
+	}, "welcome": {
+		"English": "welcome",
+		"Dansk": "velkommen"
+	}, "logout": {
+		"English": "logout",
+		"Dansk": "log ud"
+	}, "execution": {
+		"English": "execution",
+		"Dansk": "udf\u00f8relse"
+	}, "newSkillTitle": {
+		"English": "new skill",
+		"Dansk": "nyt element"
+	}, "skillName": {
+		"English": "skill name",
+		"Dansk": "element navn"
+	}, "addSkill": {
+		"English": "add skill",
+		"Dansk": "tilf\u00f8j element"
+	}
+}
+

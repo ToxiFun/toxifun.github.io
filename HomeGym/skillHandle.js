@@ -21,14 +21,18 @@ function loadSkills() {
 				
 				//Write element label
 				var newElem = document.createElement("p");
-				newElem.innerHTML = cap("name") + ": " + key[keysSorted[each]]["name"];
+				newElem.innerHTML = cap(JSONcommands["name"][language]) + ": ";
+				if (key[keysSorted[each]]["name"][language] == undefined) newElem.innerHTML += cap(JSONcommands["missingName"][language]);
+				else newElem.innerHTML += key[keysSorted[each]]["name"][language];
 				newSkill.append(newElem);
 				
 				//Get each skill element
 				for (var elem in key[keysSorted[each]]) {
 					if (elem != "contribute" && elem != "name") {
 						var newElem = document.createElement("p");
-						newElem.innerHTML = cap(elem) + ": " + key[keysSorted[each]][elem];
+						newElem.innerHTML = cap(JSONcommands[elem][language]) + ": "
+						if (isNaN(key[keysSorted[each]][elem])) newElem.innerHTML += cap(JSONcommands[key[keysSorted[each]][elem]][language]);
+						else newElem.innerHTML += cap(key[keysSorted[each]][elem]);
 						newSkill.append(newElem);
 					}
 				}
@@ -41,7 +45,8 @@ function loadSkills() {
 				
 				//User skill level label
 				var userSkillLabel = document.createElement("label");
-				userSkillLabel.innerHTML = "Skill level: ";
+				userSkillLabel.innerHTML = cap(JSONcommands["execution"][language] + ": ");
+				userSkillLabel.htmlFor = "execution";
 				userSkillLabel.classList.add("userSkillLabel");
 				userSkill.append(userSkillLabel);
 				
@@ -106,6 +111,7 @@ function loadSkills() {
 			}
 		//If no skills found
 		} else skills.innerHTML = "No skills found."
+	checkLanguage();
 	});
 }
 
@@ -124,13 +130,16 @@ function addSkills() {
 	var skillTwists = document.forms["skillForm"]["skillTwists"].value;
 	var skillDiff = document.forms["skillForm"]["skillDiff"].value;
 	var skillPlatform = document.forms["skillForm"]["skillPlatform"].value;
-	if (skillName == "" || skillPosition == "" || skillRotations == "" || skillTwists == "" || skillDiff == "" || skillPlatform == "") {
-		alert("Must be filled out");
-		return;
-	}
+	
+	if (skillName == "" || !isNaN(skillName)) return alert("Check name");
+	if (skillPosition == "") return alert("Check position");
+	if (isNaN(skillRotations) || skillRotations < 0 || skillRotations == "") return alert("Check rotations");
+	if (isNaN(skillTwists) || skillTwists < 0 || skillTwists == "") return alert("Check twists");
+	if (isNaN(skillDiff) || skillDiff < 1 || skillDiff > 10 || skillDiff == "") return alert("Check difficulty");
+	if (skillPlatform == "") return alert("Check platform");
 
 	var newSkill = {
-		"name": skillName,
+		"name": {},
 		"position": skillPosition,
 		"rotations": skillRotations,
 		"twists": skillTwists,
@@ -141,6 +150,7 @@ function addSkills() {
 			"uid": uid
 		}
 	}
+	newSkill["name"][language] = skillName;
 
 	if (ref) {
 		ref.push(newSkill);

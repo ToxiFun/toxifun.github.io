@@ -18,7 +18,7 @@ function startUp() {
 							   // this value to authenticate with your backend server, if
 							   // you have one. Use User.getToken() instead.
 			}
-			document.getElementById("userNameTitle").innerHTML = "Welcome " + name + "!";
+			document.getElementById("userNameTitle").innerHTML = cap(JSONcommands["welcome"][language]) + " " + name + "!";
 			
 		//NOT LOGGED IN
 		} else {
@@ -71,6 +71,33 @@ function startUp() {
 
 			ui.start('#firebaseui-auth-container', uiConfig);
 		}
-	loadSkills()
+	loadSkills();
+	refreshHTML();
 	});
+}
+
+function refreshHTML() {
+	var labels = document.getElementsByTagName('LABEL');
+	for (var i = 0; i < labels.length; i++) {
+		labels[i].innerHTML = cap(JSONcommands[labels[i].htmlFor][language]);
+	}
+	
+	var inputs = document.getElementsByTagName('INPUT');
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].type == "button" && inputs[i].classList != "pickLang") inputs[i].value = cap(JSONcommands[inputs[i].id][language]);
+	}
+	
+	var H1s = document.getElementsByTagName('H1');
+	for (var i = 0; i < H1s.length; i++) {
+		if (H1s[i].id != "userNameTitle") H1s[i].innerHTML = cap(JSONcommands[H1s[i].id][language]);
+	}
+}
+
+
+function checkLanguage() {
+	var allChildren = document.querySelectorAll( 'body *' );
+	for (var i = 0; i < allChildren.length; i++) {
+		if (allChildren != "") {
+		}
+	}
 }
