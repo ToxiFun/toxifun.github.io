@@ -1,5 +1,66 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#headerLogin {
+    margin-top: 12.5%;
+}
+
+#logoIntro {
+    padding: 10px;
+}
+
+.startLogo {
+    float: auto;
+    font-size: 300%;
+    margin: 0px;
+}
+
+#introText {
+    font-size: 125%;
+}
+
+th {
+}
+
+#headerLoggedin {
+    width: 70%;
+    background-color: rgba(59, 255, 0, 0.14);
+    float: center;
+}
+
+.inLogo {
+	float: left;
+    margin: 20px;
+    font-size: 200%;
+}
+
+#userNameTitle {
+	float: center;
+    margin: 20px;
+    font-size: 200%;
+}
+
+#settings {
+	float: right;
+    margin: 20px;
+}
+
+.pickLang, .settingTab {
+    margin: 5px;
+}
+
+#skills {
+    width: 70%;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgba(55, 227, 74, 0.04);
+    margin: 2.5% 0px 1% 0px;
+    padding: 20px 0px;
+}
+
 .skill {
-	border: 1px solid black;
+	border: 1px solid lightgrey;
+    border-radius: 10px;
 	padding: 10px;
 	margin: 10px;
 	width: 200px;
@@ -8,7 +69,7 @@
 }
 
 #skillForm {
-	border: 1px solid black;
+	border: 1px solid lightgrey;
 	padding: 10px;
 	margin: 10px;
 	width: 200px;
@@ -17,6 +78,9 @@
 
 .userSkill {
 	padding: 5px;
+    margin: 5px;
+    text-align: center;
+    border-radius: 20px;
 }
 
 .userSkillLevel {
@@ -24,20 +88,40 @@
 	height: 25px;
 	display: inline-block;
 	margin: 5px;
-	border: 1px solid black;
+	border: 1px solid lightgrey;
 }
 
 .sugInput {
 	width: 150px;
 }
 
-#suggest {
+.popupTab {
 	position: absolute;
-	border: 1px solid black;
+	border: 1px solid lightgrey;
 	background-color: white;
 	padding: 5px;
 }
 
+.toggleInfo {
+	width: 100%;
+    background-color: #ffffff;
+    border-width: 1px;
+    border-color: rgba(211, 211, 211, 0.72);
+}
+
 .contElem {
 	float: right;
+}
+
+#skillForm input {
+    margin-bottom: 10px;
+}
+
+#addSkill {
+    margin: 5px;
+    margin-left: 25%;
+}
+
+input:hover, button:hover {
+	cursor: pointer;
 }

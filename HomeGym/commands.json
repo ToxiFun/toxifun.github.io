@@ -2,6 +2,12 @@ var JSONcommands = {
 	"HomeGym": {
 		"English": "HomeGym",
 		"Dansk": "HomeGym"
+	}, "introText": {
+		"English": "Online gymnastics training journal and statistics.",
+		"Dansk": "Online gymanstik træningsjournal og statistik."
+	}, "settings": {
+		"English": "menu",
+		"Dansk": "menu"
 	}, "language": {
 		"English": "language",
 		"Dansk": "sprog"
@@ -9,8 +15,8 @@ var JSONcommands = {
 		"English": "name",
 		"Dansk": "navn"
 	}, "missingName": {
-		"English": "name missing",
-		"Dansk": "navn mangler"
+		"English": "missing",
+		"Dansk": "mangler"
 	}, "difficulty": {
 		"English": "difficulty",
 		"Dansk": "Sv\u00e6rhedsgrad"
@@ -104,3 +110,11 @@ var JSONcommands = {
 	}
 }
 
+JSONcolors = {
+    "userSkill": {
+        "grey": "rgba(226, 226, 226, 0.5)",
+        "red": "rgba(245, 43, 14, 0.4)",
+        "yellow": "rgba(243, 251, 4, 0.4)",
+        "green": "rgba(27, 222, 36, 0.4)"
+    }
+}

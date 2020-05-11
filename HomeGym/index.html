@@ -25,19 +25,29 @@
 <body onload="startUp()">
 
 <center>
-<div id="header">
-<h1 id="HomeGym">HomeGym</h1>
-<div id="firebaseui-auth-container"></div>
-<p id="loginLoader">Loading data...</p>
+<div id="headerLogin">
+    <div id="logoIntro">
+        <h1 id="HomeGym" class="startLogo">HomeGym</h1>
+        <p id="introText"></p>
+    </div>
+    <div id="firebaseui-auth-container"></div>
+    <span id="loginLoader">Loading data...</span>
 </div>
 
-<div id="loggedIn">
-	<h1 id="userNameTitle"></h1>
-	<input type="button" value="Sign-out" onclick="logout()" id="logout">
-	<div id="langPicks" onclick="languageSwap()"><input type="button" value="Language" id="language"></div>
+<div id="loggedIn" style="display: none">
+<div id="headerLoggedin">
+	<table style="width: 100%">
+		<tr>
+			<th><h1 id="HomeGym" class="inLogo">HomeGym</h1></th>
+			<th><h1 id="userNameTitle"></h1></th>
+			<th><input type="button" value="settings" onclick="settings(event)" id="settings"></th>
+		</tr>
+	</table>
+</div>
+<div id="advance">
+</div>
 	
-	<p id="skills">Loading skills...</p>
-	
+	<div id="skills"><p>Loading skills...</p></div>
 	
 <div id="singleSkillPage">
 </div>

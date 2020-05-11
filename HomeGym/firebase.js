@@ -19,14 +19,3 @@ var database = firebase.database();
 if (database) console.log("Database load success");
 else console.log("Database load fail");
 var ref = database.ref("tumblingSkills");
-
-function logout() {
-	firebase.auth().signOut().then(function() {
-		// Sign-out successful.
-		console.log("Log out complete.");
-		window.location.reload();
-	}).catch(function(error) {
-		// An error happened.
-		console.log("Log out error.");
-	});
-}

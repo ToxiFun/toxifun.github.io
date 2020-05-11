@@ -21,6 +21,7 @@ function loadSkills() {
 				
 				//Write element name - holder
 				var nameHolder = document.createElement("p");
+					nameHolder.classList.add("name");
 				
 					//Make element title
 					var newElem = document.createElement("span");
@@ -31,14 +32,14 @@ function loadSkills() {
 					var newElemName = document.createElement("span");
 					newElemName.classList.add("changable");
 					if (key[keysSorted[each]]["name"][language] == undefined) {
-						newElemName.innerHTML = cap(JSONcommands["missingName"][language]);
+						newElemName.innerHTML = "<i>" + cap(JSONcommands["missingName"][language]) + "<i>";
 					} else newElemName.innerHTML = key[keysSorted[each]]["name"][language];
 					nameHolder.append(newElemName);
 					
 					//Make edit button
-					var contElem = document.createElement("input");
-					contElem.type = "button"
+					var contElem = document.createElement("button");
 					contElem.classList.add("contElem");
+					contElem.innerHTML = "&#9998;";
 					contElem.skillId = keysSorted[each];
 					if (key[keysSorted[each]]["name"][language] == undefined) contElem.noName = true;
 					contElem.onclick = function(event) {
@@ -47,6 +48,7 @@ function loadSkills() {
 							//Make tab
 							var suggest = document.createElement("div");
 							suggest.id = "suggest";
+							suggest.classList.add("popupTab");
 							var scrollLeft = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
 							var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 							suggest.style.left = event.clientX + scrollLeft;
@@ -133,6 +135,7 @@ function loadSkills() {
 					if (elem != "contribute" && elem != "name" && elem != "otherNames" && elem != "reportages") {
 						//Write element name
 						var nameHolder = document.createElement("p");
+						nameHolder.classList.add(elem);
 						
 						//Make element title
 						var newElem = document.createElement("span");
@@ -159,11 +162,11 @@ function loadSkills() {
 						
 						if (elem == "diff" || elem == "difficulty") {
 							//Make edit button
-							var contElem = document.createElement("input");
-							contElem.type = "button"
+							var contElem = document.createElement("button");
 							contElem.classList.add("contElem");
 							contElem.skillId = keysSorted[each];
 							contElem.elem = elem;
+							contElem.innerHTML = "&#9998;";
 							contElem.onclick = function(event) {
 								if (document.getElementById("suggest")) {
 								} else {
@@ -222,13 +225,15 @@ function loadSkills() {
 				userSkill.classList.add("userSkill");
 				userSkill.id = "skillLevel" + keysSorted[each];
 				userSkill.skillId = keysSorted[each];
+                userSkill.style.backgroundColor = JSONcolors.userSkill.grey;
+                userSkill.style.fontWeight = "bold";
 				
 				//User skill level label
 				var userSkillLabel = document.createElement("label");
-				userSkillLabel.innerHTML = cap(JSONcommands["execution"][language] + ": ");
+				userSkillLabel.innerHTML = cap(JSONcommands["execution"][language]);
 				userSkillLabel.htmlFor = "execution";
 				userSkillLabel.classList.add("userSkillLabel");
-				userSkill.append(userSkillLabel);
+				userSkill.append(userSkillLabel); 
 				
 				userSkill.append(document.createElement("br"));
 				
@@ -237,14 +242,13 @@ function loadSkills() {
 					var getSkillLevel = snapshot.val();
 					for (var every in getSkillLevel) {
 						var curSkillLevel = document.getElementById("skillLevel" + every);
-						if (getSkillLevel[every] == 0) {
-							curSkillLevel.style.backgroundColor = "grey";
-						} else if (getSkillLevel[every] == 1) {
-							curSkillLevel.style.backgroundColor = "red";
+                        curSkillLevel.style.fontWeight = "normal";
+						if (getSkillLevel[every] == 1) {
+							curSkillLevel.style.backgroundColor = JSONcolors.userSkill.red;
 						} else if (getSkillLevel[every] == 2) {
-							curSkillLevel.style.backgroundColor = "yellow";
+							curSkillLevel.style.backgroundColor = JSONcolors.userSkill.yellow;
 						} else if (getSkillLevel[every] == 3) {
-							curSkillLevel.style.backgroundColor = "green";
+							curSkillLevel.style.backgroundColor = JSONcolors.userSkill.green;
 						}
 					}
 				});	
@@ -266,16 +270,24 @@ function loadSkills() {
 							userSkillLevel.id = "skillLevelRadio_" + keysSorted[each] + "_" + i;
 							userSkillLevel.skillId = this.skillId;
 							userSkillLevel.levelId = i;
-							if (i == 1) userSkillLevel.style.backgroundColor = "red";
-							else if (i == 2) userSkillLevel.style.backgroundColor = "yellow";
-							else if (i == 3) userSkillLevel.style.backgroundColor = "green";
+							userSkillLevel.style.textAlign = "center";
+								if (i == 1) {
+                                    userSkillLevel.style.backgroundColor = JSONcolors.userSkill.red;
+									userSkillLevel.innerHTML = "&#10006;";
+								} else if (i == 2) {
+									userSkillLevel.style.backgroundColor = JSONcolors.userSkill.yellow;
+									userSkillLevel.innerHTML = "&#10069;";
+								} else if (i == 3) {
+									userSkillLevel.style.backgroundColor = JSONcolors.userSkill.green;
+									userSkillLevel.innerHTML = "&#10004;";
+								}
 							
 							//Change skill level
 							userSkillLevel.onclick = function() {
 								var getParent = document.getElementById("skillLevel" + this.skillId)
-								if (this.levelId == 1) getParent.style.backgroundColor = "red";
-								else if (this.levelId == 2) getParent.style.backgroundColor = "yellow";
-								else if (this.levelId == 3) getParent.style.backgroundColor = "green";
+								if (this.levelId == 1) getParent.style.backgroundColor = JSONcolors.userSkill.red;
+								else if (this.levelId == 2) getParent.style.backgroundColor = JSONcolors.userSkill.yellow;
+								else if (this.levelId == 3) getParent.style.backgroundColor = JSONcolors.userSkill.green;
 								saveSkills(this.skillId, this.levelId);
 							}
 							pickSkillLevel.append(userSkillLevel);
@@ -283,7 +295,6 @@ function loadSkills() {
 						this.append(pickSkillLevel);
 					}
 				}
-				
 				newSkill.append(userSkill);
 				
 				/*
@@ -292,6 +303,34 @@ function loadSkills() {
 				elemLink.href = "element.html";
 				newSkill.append(elemLink);
 				*/
+				
+				var hide = document.createElement("button");
+				hide.innerHTML = "v";
+				hide.classList.add("toggleInfo");
+				hide.show = true;
+				hide.onclick = function () {
+					var siblings = this.parentNode.childNodes;	
+					if (this.show) {
+						for (var i = 0; i < siblings.length; i++) {
+							if (!siblings[i].classList.contains("name") && !siblings[i].classList.contains("toggleInfo")) {
+								siblings[i].style.position = "absolute";
+								siblings[i].style.visibility = "hidden";
+								this.innerHTML = "^"
+							}
+						}
+						this.show = false;
+					} else {
+						for (var i = 0; i < siblings.length; i++) {
+							if (!siblings[i].classList.contains("name") && !siblings[i].classList.contains("toggleInfo")) {
+								siblings[i].style.position = "relative";
+								siblings[i].style.visibility = "visible";
+								this.innerHTML = "v"
+							}
+						}
+						this.show = true;
+					}
+				}
+				newSkill.append(hide);
 				
 				//Append to output
 				skills.append(newSkill);
@@ -328,9 +367,9 @@ function addSkills() {
 	var newSkill = {
 		"name": {},
 		"position": skillPosition,
-		"rotations": skillRotations,
-		"twists": skillTwists,
-		"diff": [skillDiff],
+		"rotations": parseInt(skillRotations),
+		"twists": parseInt(skillTwists),
+		"diff": [parseInt(skillDiff)],
 		"platform": skillPlatform,
 		"contribute": {
 			"creater": {

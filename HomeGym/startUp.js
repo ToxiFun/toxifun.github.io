@@ -4,8 +4,10 @@ function startUp() {
 		if (user) {
 			console.log("User signed in.");
 			document.getElementById('firebaseui-auth-container').style.display = 'none';
-			document.getElementById('loggedIn').style.display = 'block';
 			document.getElementById('loginLoader').style.display = 'none';
+			document.getElementById('headerLogin').style.display = 'none';
+            
+			document.getElementById('loggedIn').style.display = 'block';
 			
 			var user = firebase.auth().currentUser
 
@@ -90,6 +92,11 @@ function refreshHTML() {
 	var H1s = document.getElementsByTagName('H1');
 	for (var i = 0; i < H1s.length; i++) {
 		if (H1s[i].id != "userNameTitle") H1s[i].innerHTML = cap(JSONcommands[H1s[i].id][language]);
+	}
+    
+    var Ps = document.getElementsByTagName('P');
+	for (var i = 0; i < Ps.length; i++) {
+		if (Ps[i].id != "userNameTitle" && Ps[i].id != "") Ps[i].innerHTML = cap(JSONcommands[Ps[i].id][language]);
 	}
 }
 
